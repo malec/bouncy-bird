@@ -1,7 +1,4 @@
 import javax.swing.JFrame;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.Timer;
 
 public class Game extends JFrame {
     View view;

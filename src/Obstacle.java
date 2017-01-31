@@ -49,7 +49,7 @@ public class Obstacle {
                 setOrientation(pointUP);
             }
             xPosition -= 10 - difficultyIncrease;
-            difficultyIncrease -= .01;
+            difficultyIncrease -= .005;
         }
     }
 

@@ -1,11 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
-import java.io.Console;
-import java.io.IOException;
 import java.awt.Graphics;
 import java.io.File;
-import java.util.Collection;
 
 class View extends JPanel {
     JButton b1;

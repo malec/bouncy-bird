@@ -11,7 +11,6 @@ public class Bird {
     public int bird_y;
     public int bird_x=20;
     public double dblVerticalVelcoity;
-    private int flaps;
     private int frameCouter;
     public Image birdImage;
     static public Image defaultbirdImage;
