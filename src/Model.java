@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -12,6 +15,7 @@ class Model {
     private boolean gameRunning;
     private int score=0;
     LinkedList<Obstacle> obstacleCollection;
+    ListIterator<Obstacle> listIterator = null;
 
     Model() {
         bird = new Bird();
@@ -19,11 +23,13 @@ class Model {
         random.setSeed(13);
         gameRunning = true;
         score = 0;
+        listIterator=obstacleCollection.listIterator();
     }
 
     public void update() {
         if (gameIsRunning()) {
             bird.update();
+            while(obstacleCollection.hasN)
         }
     }
 

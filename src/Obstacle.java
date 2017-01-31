@@ -106,4 +106,9 @@ public class Obstacle {
         difficultyIncrease=0;
     }
 
+	public void tubeUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
