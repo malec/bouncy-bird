@@ -1,9 +1,4 @@
-//import javax.crypto.*;
-//import javax.crypto.spec.IvParameterSpec;
-//import javax.crypto.spec.SecretKeySpec;
 import javax.swing.*;
-//import java.io.*;
-//import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
