@@ -1,13 +1,12 @@
 import javax.swing.*;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
+//import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 class Model {
     Bird bird;
@@ -15,7 +14,7 @@ class Model {
     private boolean gameRunning;
     private int score=0;
     LinkedList<Obstacle> obstacleCollection;
-    ListIterator<Obstacle> listIterator = null;
+    ListIterator<Obstacle> listIterator;
 
     Model() {
         bird = new Bird();
@@ -23,13 +22,14 @@ class Model {
         random.setSeed(13);
         gameRunning = true;
         score = 0;
+        obstacleCollection=new LinkedList<Obstacle>();
         listIterator=obstacleCollection.listIterator();
     }
 
     public void update() {
         if (gameIsRunning()) {
             bird.update();
-            while(obstacleCollection.hasN)
+            while(obstacleCollection.)//Pick Up Here
         }
     }
 
