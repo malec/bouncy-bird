@@ -9,12 +9,12 @@ import java.net.UnknownHostException;
 import java.util.*;
 
 class Model {
-    Bird bird;
-    Random random;
+    public Bird bird;
+    public Random random;
     private boolean gameRunning;
     private int score=0;
-    LinkedList<Obstacle> obstacleCollection;
-    ListIterator<Obstacle> listIterator;
+    public LinkedList<Obstacle> obstacleCollection;
+    public Iterator<Obstacle> listIterator;
 
     Model() {
         bird = new Bird();
@@ -23,13 +23,16 @@ class Model {
         gameRunning = true;
         score = 0;
         obstacleCollection=new LinkedList<Obstacle>();
-        listIterator=obstacleCollection.listIterator();
+        listIterator=obstacleCollection.iterator();
     }
 
     public void update() {
         if (gameIsRunning()) {
             bird.update();
-            while(obstacleCollection.)//Pick Up Here
+            while(listIterator.hasNext())//Cycle through the list and update
+            {
+            	listIterator.next().update(random);
+            }
         }
     }
 
