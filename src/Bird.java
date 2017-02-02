@@ -52,11 +52,7 @@ public class Bird {
             dblVerticalVelcoity=0;
         }
     }
-
-    public void setDestination(int x, int y) {
-        //this.dest_x = x;
-        //this.dest_y = y;
-    }
+    
     public  void flap()
     {
         dblVerticalVelcoity=0;

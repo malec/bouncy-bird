@@ -37,7 +37,7 @@ class View extends JPanel {
 		panel.setBorder(BorderFactory.createEmptyBorder(380, 250, 10, 250));
 		panel.add(lifeIndicator);
 		this.add(panel);
-		hand= new Hand();
+		hand = new Hand();
 
 		// To read the image in.
 		try {
@@ -84,7 +84,7 @@ class View extends JPanel {
 	}
 
 	void gameOver() {
-		hand.animate();
+		hand.animate(model.bird.bird_y);
 	}
 
 	void removeButton() {
@@ -99,13 +99,13 @@ class View extends JPanel {
 			if (temp.allowCollision() && this.model.bird.getBounds().intersects(temp.getBounds())) {
 				temp.bypassCollision();
 				temp.bypassScore();
-				lifeIndicator.setValue(lifeIndicator.getValue() - 30);
+				decreaseProgressBar();
 				return true;
 			} else if (temp.allowScore() && this.model.bird.getBounds().intersects(temp.getPassSpace())) {
 				// Update the score
 				this.model.incrementScore();
 				temp.bypassScore();
-				lifeIndicator.setValue(lifeIndicator.getValue() + 5);
+				increaseProgressBar();
 				return false;
 			}
 		}
@@ -116,6 +116,18 @@ class View extends JPanel {
 		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
 			tempIterator.next().resetDifficulty();
+		}
+	}
+
+	private void decreaseProgressBar() {
+		if (lifeIndicator.getValue() > 30) {
+			lifeIndicator.setValue(lifeIndicator.getValue() - 30);
+		}
+	}
+
+	private void increaseProgressBar() {
+		if (lifeIndicator.getValue() < 100) {
+			lifeIndicator.setValue(lifeIndicator.getValue() + 5);
 		}
 	}
 }
