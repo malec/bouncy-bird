@@ -8,7 +8,6 @@ import java.util.Iterator;
 class View extends JPanel {
 	private JButton b1;
 	public Model model;
-	private Hand hand;
 	// private Obstacle first;
 	// private Obstacle second;
 	private JLabel label;
@@ -37,7 +36,6 @@ class View extends JPanel {
 		panel.setBorder(BorderFactory.createEmptyBorder(380, 250, 10, 250));
 		panel.add(lifeIndicator);
 		this.add(panel);
-		hand = new Hand();
 
 		// To read the image in.
 		try {
@@ -57,7 +55,7 @@ class View extends JPanel {
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.drawImage(this.model.bird.birdImage, model.bird.bird_x, model.bird.bird_y, null);
-		g.drawImage(hand.getImage(), hand.getXPosition(), hand.getYPosition(), null);
+		g.drawImage(model.hand.getImage(), model.hand.getXPosition(), model.hand.getYPosition(), null);
 		// Iterate through and draw the tubes.
 		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
@@ -87,7 +85,7 @@ class View extends JPanel {
 	void gameOver() {
 		//freeze game
 		model.gameOver();
-		hand.animate(model.bird.bird_y);
+		model.hand.animate(model.bird.bird_y);
 	}
 
 	void removeButton() {

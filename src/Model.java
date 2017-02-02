@@ -17,7 +17,7 @@ class Model {
 	private Iterator<Obstacle> obstacleIterator;
 	int frames;
 	public boolean gameOver;
-
+	public Hand hand;
 	Model() {
 		bird = new Bird();
 		random = new Random();
@@ -26,6 +26,7 @@ class Model {
 		score = 0;
 		obstacleCollection = new LinkedList<Obstacle>();
 		gameOver=false;
+		hand = new Hand();
 	}
 
 	public void update() {
@@ -50,6 +51,7 @@ class Model {
 				}
 			}
 		}
+		
 	}
 
 	public void setDestination(int x, int y) {
