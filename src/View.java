@@ -49,7 +49,7 @@ class View extends JPanel {
 		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
 			Obstacle temp = tempIterator.next();
-			g.drawImage(temp.tube, temp.xPosition, temp.yPosition, null);
+			g.drawImage(temp.gettube(), temp.xPosition, temp.yPosition, null);
 		}
 		// g.drawImage(this.first.tube, this.first.xPosition,
 		// this.first.yPosition, null);

@@ -1,4 +1,7 @@
 import javax.imageio.ImageIO;
+
+import com.sun.xml.internal.ws.resources.TubelineassemblyMessages;
+
 import java.awt.*;
 import java.io.File;
 import java.util.Random;
@@ -10,7 +13,8 @@ public class Obstacle {
 	public boolean pointUP;
 	public int xPosition = 1100;
 	public int yPosition;
-	public Image tube;
+	public static Image tubeUP = null;
+	public static Image tubeDown = null;
 	private double difficultyIncrease = 0;
 	private int farRightXPosition = 600;
 	private int maxYUpright = 450;
@@ -58,24 +62,27 @@ public class Obstacle {
 
 	private void setOrientation(boolean pointUP) {
 		if (pointUP) {
-			try {
-				tube = ImageIO.read(new File("tube_up.png"));
-			} catch (Exception error) {
-				error.printStackTrace();
-				System.exit(1);
+			if (tubeUP == null) {
+				try {
+					tubeUP = ImageIO.read(new File("tube_up.png"));
+				} catch (Exception error) {
+					error.printStackTrace();
+					System.exit(1);
+				}
 			}
-		} else {
-			try {
-				tube = ImageIO.read(new File("tube_down.png"));
-			} catch (Exception error) {
-				error.printStackTrace();
-				System.exit(1);
+			if (tubeDown == null) {
+				try {
+					tubeDown = ImageIO.read(new File("tube_down.png"));
+				} catch (Exception error) {
+					error.printStackTrace();
+					System.exit(1);
+				}
 			}
 		}
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(this.xPosition, this.yPosition, tube.getWidth(null), tube.getHeight(null));
+		return new Rectangle(this.xPosition, this.yPosition, gettube().getWidth(null), gettube().getHeight(null));
 	}
 
 	public boolean allowCollision() {
@@ -99,13 +106,13 @@ public class Obstacle {
 		// this.xPosition+this.tube.getWidth(null)+birdWidth+5 add score once
 		// he's clear of the tube. 5 px is arbitrary
 		if (!pointUP) {
-			return new Rectangle(this.xPosition + this.tube.getWidth(null) + birdWidth + 5,
-					this.yPosition + this.tube.getHeight(null), this.tube.getWidth(null),
-					500 - this.yPosition + this.tube.getHeight(null));
+			return new Rectangle(this.xPosition + this.gettube().getWidth(null) + birdWidth + 5,
+					this.yPosition + this.gettube().getHeight(null), this.gettube().getWidth(null),
+					500 - this.yPosition + this.gettube().getHeight(null));
 		}
 		if (pointUP) {
-			return new Rectangle(this.xPosition + this.tube.getWidth(null) + birdWidth + 5, 0, this.tube.getWidth(null),
-					this.yPosition);
+			return new Rectangle(this.xPosition + this.gettube().getWidth(null) + birdWidth + 5, 0,
+					this.gettube().getWidth(null), this.yPosition);
 		}
 		return null; // Not initialized?
 	}
@@ -116,7 +123,12 @@ public class Obstacle {
 
 	public void tubeUpdate() {
 		// TODO Auto-generated method stub
-
 	}
 
+	public Image gettube() {
+		if (pointUP) {
+			return tubeUP;
+		}
+		return tubeDown;
+	}
 }
