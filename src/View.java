@@ -101,13 +101,6 @@ class View extends JPanel {
 		return false;
 	}
 
-	private int positive(int input) {
-		if (input < 0) {
-			return input *= -1;
-		}
-		return input;
-	}
-
 	public void resetDifficulty() {
 		first.resetDifficulty();
 		second.resetDifficulty();
