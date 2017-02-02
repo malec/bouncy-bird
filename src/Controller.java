@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.event.*;
 
 class Controller implements KeyListener, ActionListener, MouseListener {
