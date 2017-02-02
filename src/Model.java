@@ -9,106 +9,106 @@ import java.net.UnknownHostException;
 import java.util.*;
 
 class Model {
-    public Bird bird;
-    public Random random;
-    private boolean gameRunning;
-    private int score=0;
-    public LinkedList<Obstacle> obstacleCollection;
-    public Iterator<Obstacle> listIterator;
+	public Bird bird;
+	public Random random;
+	private boolean gameRunning;
+	private int score = 0;
+	public LinkedList<Obstacle> obstacleCollection;
+	private Iterator<Obstacle> obstacleIterator;
 
-    Model() {
-        bird = new Bird();
-        random = new Random();
-        random.setSeed(13);
-        gameRunning = true;
-        score = 0;
-        obstacleCollection=new LinkedList<Obstacle>();
-        listIterator=obstacleCollection.iterator();
-    }
+	Model() {
+		bird = new Bird();
+		random = new Random();
+		random.setSeed(13);
+		gameRunning = true;
+		score = 0;
+		obstacleCollection = new LinkedList<Obstacle>();
+	}
 
-    public void update() {
-        if (gameIsRunning()) {
-            bird.update();
-            while(listIterator.hasNext())//Cycle through the list and update
-            {
-            	listIterator.next().update(random);
-            }
-        }
-    }
+	public void update() {
+		if (gameIsRunning()) {
+			bird.update();
+			obstacleIterator=obstacleCollection.iterator();
+			while (obstacleIterator.hasNext())// Cycle through the list and update
+			{
+				obstacleIterator.next().update(random);
+			}
+		}
+	}
 
-    public void setDestination(int x, int y) {
-        //bird.dest_x = x;
-        //bird.dest_y = y;
-    }
+	public void setDestination(int x, int y) {
+		// bird.dest_x = x;
+		// bird.dest_y = y;
+	}
 
-    public void onClick() {
-        if (gameIsRunning()) {
-            bird.flap();
-        }
-    }
+	public void onClick() {
+		if (gameIsRunning()) {
+			bird.flap();
+		}
+	}
 
-    public boolean gameIsRunning() {
-        return gameRunning;
-    }
+	public boolean gameIsRunning() {
+		return gameRunning;
+	}
 
-    public void gamePause() {
-        this.gameRunning = false;
-        this.bird.dblVerticalVelcoity = 0;
-        final JOptionPane optionPane = new JOptionPane(
-                "Paused. Would you like to save?",
-                JOptionPane.QUESTION_MESSAGE,
-                JOptionPane.YES_NO_OPTION);
-        Object options[] = {"Resume", "Save", "Load Game"};
-        int dialogResult = JOptionPane.showOptionDialog(null, "Paused. Select an option", "Menu", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
-        if (dialogResult == 1) { //Save the game.
-           JOptionPane.showMessageDialog(null,"To come in the future");
-        } else if (dialogResult == 2) {
-            JOptionPane.showMessageDialog(null,"To come in the future");
-        }
-        else if(dialogResult==3)
-        {
-            scoreReset();
+	public void gamePause() {
+		this.gameRunning = false;
+		this.bird.dblVerticalVelcoity = 0;
+		final JOptionPane optionPane = new JOptionPane("Paused. Would you like to save?", JOptionPane.QUESTION_MESSAGE,
+				JOptionPane.YES_NO_OPTION);
+		Object options[] = { "Resume", "Save", "Load Game" };
+		int dialogResult = JOptionPane.showOptionDialog(null, "Paused. Select an option", "Menu",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+		if (dialogResult == 1) { // Save the game.
+			JOptionPane.showMessageDialog(null, "To come in the future");
+		} else if (dialogResult == 2) {
+			JOptionPane.showMessageDialog(null, "To come in the future");
+		} else if (dialogResult == 3) {
+			scoreReset();
 
-        }
-        this.gameResume();
-    }
+		}
+		this.gameResume();
+	}
 
-    public void gameResume() {
-        this.gameRunning = true;
+	public void gameResume() {
+		this.gameRunning = true;
 
-    }
+	}
 
-    private String getMAC() {
-        InetAddress ip;
-        try {
-            ip = InetAddress.getLocalHost();
-            NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+	private String getMAC() {
+		InetAddress ip;
+		try {
+			ip = InetAddress.getLocalHost();
+			NetworkInterface network = NetworkInterface.getByInetAddress(ip);
 
-            byte[] mac = network.getHardwareAddress();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < mac.length; i++) {
-                sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
-            }
-            return sb.toString();
-        } catch (UnknownHostException e) {
+			byte[] mac = network.getHardwareAddress();
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < mac.length; i++) {
+				sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+			}
+			return sb.toString();
+		} catch (UnknownHostException e) {
 
-            e.printStackTrace();
+			e.printStackTrace();
 
-        } catch (SocketException e) {
+		} catch (SocketException e) {
 
-            e.printStackTrace();
+			e.printStackTrace();
 
-        }
-        return null;
-    }
+		}
+		return null;
+	}
 
-    public void incrementScore()
-    {
-        score++;
-        System.out.println("SCORE++. Score: "+score);
-    }
-    public void scoreReset()
-    {
-        this.score=0;
-    }
+	public void incrementScore() {
+		score++;
+		System.out.println("SCORE++. Score: " + score);
+	}
+
+	public void scoreReset() {
+		this.score = 0;
+	}
+
+	public Iterator<Obstacle> getIterator() {
+		return obstacleCollection.iterator();
+	}
 }

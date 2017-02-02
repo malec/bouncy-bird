@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.io.File;
+import java.util.Iterator;
 
 class View extends JPanel {
 	JButton b1;
@@ -10,6 +11,7 @@ class View extends JPanel {
 	Obstacle first;
 	Obstacle second;
 	JLabel label;
+	Iterator<Obstacle> tempIterator;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -23,20 +25,24 @@ class View extends JPanel {
 		label.addKeyListener(c);
 		this.add(label);
 		this.addKeyListener(c);
-		// this.add(labelPause);
-		try // To read the image in.
-		{
+
+		// To read the image in.
+		try {
 			this.model.bird.birdImage = ImageIO.read(new File("bird.png"));
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 			System.exit(1);
 		}
-		first = new Obstacle(true, 500, 200);// max 100
+
+		// Set Obstacles
+		// Remove these later
+		first = new Obstacle(true, 500, 200);// remove these later
 		second = new Obstacle(false, 999, -70);
-		// add the first two obstacles to the list.
-		this.model.obstacleCollection.addLast(new Obstacle(true, 500, 200));// max
-																			// 100
-		this.model.obstacleCollection.addLast(new Obstacle(false, 999, -70));
+
+		// Add the first two obstacles to the list.
+		this.model.obstacleCollection.add(new Obstacle(true, 500, 200));// max
+																		// 100
+		this.model.obstacleCollection.add(new Obstacle(false, 999, -70));
 	}
 
 	public void paintComponent(Graphics g) {
@@ -46,8 +52,9 @@ class View extends JPanel {
 		g.drawImage(this.model.bird.birdImage, model.bird.bird_x, model.bird.bird_y, null);
 
 		// Iterate through and draw the tubes.
-		while (model.listIterator.hasNext()) {
-			Obstacle temp = model.listIterator.next();
+		tempIterator=model.getIterator();
+		while (tempIterator.hasNext()) {
+			Obstacle temp = model.getIterator().next();
 			g.drawImage(temp.tube, temp.xPosition, temp.yPosition, null);
 		}
 		// g.drawImage(this.first.tube, this.first.xPosition,
@@ -57,8 +64,9 @@ class View extends JPanel {
 		// this.labelPause.setVisible(!this.model.gameIsRunning());
 		if (this.model.gameIsRunning()) {
 			// Update each obstacle.
-			while (model.listIterator.hasNext()) {
-				model.listIterator.next().update(model.random);
+			tempIterator = model.getIterator();
+			while (tempIterator.hasNext()) {
+				tempIterator.next().update(model.random);
 			}
 			// System.out.println(this.first.tube.getHeight(null)+" Is the
 			// height");
