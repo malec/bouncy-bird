@@ -32,11 +32,13 @@ public class Obstacle {
     }
 
     public void update(Random random) {
+    	//If the tube is off the screen, the redraw it.
         if (xPosition < -100) {
             bypassCollision = false;
             bypassScore=false;
             xPosition = farRightXPosition;
         } else {
+        	//If it's at the spawn position, redraw it.
             if (xPosition == farRightXPosition) {
                 //Set the orientation.
                 pointUP = random.nextBoolean();
@@ -47,9 +49,9 @@ public class Obstacle {
                     yPosition = (random.nextInt(maxYNotUpright - minYNotUpright) + minYNotUpright) * -1;
                 }
                 setOrientation(pointUP);
+                difficultyIncrease -= .002;
             }
-            xPosition -= 10 - difficultyIncrease;
-            difficultyIncrease -= .005;
+            xPosition -= 8 - difficultyIncrease;
         }
     }
 

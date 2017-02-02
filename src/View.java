@@ -52,7 +52,7 @@ class View extends JPanel {
 		g.drawImage(this.model.bird.birdImage, model.bird.bird_x, model.bird.bird_y, null);
 
 		// Iterate through and draw the tubes.
-		tempIterator=model.getIterator();
+		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
 			Obstacle temp = tempIterator.next();
 			g.drawImage(temp.tube, temp.xPosition, temp.yPosition, null);
@@ -83,27 +83,20 @@ class View extends JPanel {
 	}
 
 	private boolean checkCollision() {
-		if (this.first.allowCollision() && this.model.bird.getBounds().intersects(this.first.getBounds())) {
-			this.first.bypassCollision();
-			this.first.bypassScore();
-			return true;
-		} else if (this.first.allowScore() && this.model.bird.getBounds().intersects(first.getPassSpace())) {// Update
-																												// the
-																												// score
-			this.model.incrementScore();
-			this.first.bypassScore();
-			return false;
-		}
-		if (this.second.allowCollision() && this.model.bird.getBounds().intersects(this.second.getBounds())) {
-			this.second.bypassCollision();
-			this.second.bypassScore();
-			return true;
-		} else if (this.second.allowScore() && this.model.bird.getBounds().intersects(second.getPassSpace())) {// Update
-																												// the
-																												// score
-			this.model.incrementScore();
-			this.second.bypassScore();
-			return false;
+		tempIterator = model.getIterator();
+		while (tempIterator.hasNext()) {
+			Obstacle temp = tempIterator.next();
+			if (temp.allowCollision() && this.model.bird.getBounds().intersects(temp.getBounds())) {
+				temp.bypassCollision();
+				temp.bypassScore();
+				return true;
+			} else if (temp.allowScore() && this.model.bird.getBounds().intersects(temp.getPassSpace())) {// Update
+																													// the
+																													// score
+				this.model.incrementScore();
+				temp.bypassScore();
+				return false;
+			}
 		}
 		return false;
 	}
