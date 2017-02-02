@@ -6,14 +6,15 @@ import java.io.File;
 import java.util.Iterator;
 
 class View extends JPanel {
-	JButton b1;
-	Model model;
-	Obstacle first;
-	Obstacle second;
-	JLabel label;
-	Iterator<Obstacle> tempIterator;
-	int frames=0;
-	JProgressBar lifeIndicator;
+	private JButton b1;
+	public Model model;
+	private Hand hand;
+	// private Obstacle first;
+	// private Obstacle second;
+	private JLabel label;
+	private Iterator<Obstacle> tempIterator;
+	private int frames = 0;
+	private JProgressBar lifeIndicator;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -21,7 +22,7 @@ class View extends JPanel {
 		b1 = new JButton("Pause");
 		b1.addActionListener(c);
 		b1.setFocusable(false);
-		//this.add(b1);
+		// this.add(b1);
 		label = new JLabel();
 		label.setFocusable(true);
 		label.addKeyListener(c);
@@ -32,10 +33,11 @@ class View extends JPanel {
 		lifeIndicator.setValue(100);
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
-		this.setBorder(BorderFactory.createEmptyBorder(0,250,0,250));
-		panel.setBorder(BorderFactory.createEmptyBorder(380,250,10,250));
+		this.setBorder(BorderFactory.createEmptyBorder(0, 250, 0, 250));
+		panel.setBorder(BorderFactory.createEmptyBorder(380, 250, 10, 250));
 		panel.add(lifeIndicator);
 		this.add(panel);
+		hand= new Hand();
 
 		// To read the image in.
 		try {
@@ -52,7 +54,7 @@ class View extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		frames++;
- 		g.setColor(new Color(128, 255, 255));
+		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.drawImage(this.model.bird.birdImage, model.bird.bird_x, model.bird.bird_y, null);
 		// Iterate through and draw the tubes.
@@ -61,11 +63,7 @@ class View extends JPanel {
 			Obstacle temp = tempIterator.next();
 			g.drawImage(temp.gettube(), temp.xPosition, temp.yPosition, null);
 		}
-		// g.drawImage(this.first.tube, this.first.xPosition,
-		// this.first.yPosition, null);
-		// g.drawImage(this.second.tube, this.second.xPosition,
-		// this.second.yPosition, null);
-		// this.labelPause.setVisible(!this.model.gameIsRunning());
+		checkScore();
 		if (this.model.gameIsRunning()) {
 			// Update each obstacle.
 			tempIterator = model.getIterator();
@@ -77,6 +75,16 @@ class View extends JPanel {
 				this.model.scoreReset();
 			}
 		}
+	}
+
+	private void checkScore() {
+		if (lifeIndicator.getValue() <= 0) {
+			gameOver();
+		}
+	}
+
+	void gameOver() {
+		hand.animate();
 	}
 
 	void removeButton() {
@@ -91,13 +99,13 @@ class View extends JPanel {
 			if (temp.allowCollision() && this.model.bird.getBounds().intersects(temp.getBounds())) {
 				temp.bypassCollision();
 				temp.bypassScore();
-				lifeIndicator.setValue(lifeIndicator.getValue()-30);
+				lifeIndicator.setValue(lifeIndicator.getValue() - 30);
 				return true;
 			} else if (temp.allowScore() && this.model.bird.getBounds().intersects(temp.getPassSpace())) {
-				//Update the score
+				// Update the score
 				this.model.incrementScore();
 				temp.bypassScore();
-				lifeIndicator.setValue(lifeIndicator.getValue()+5);
+				lifeIndicator.setValue(lifeIndicator.getValue() + 5);
 				return false;
 			}
 		}
@@ -105,7 +113,9 @@ class View extends JPanel {
 	}
 
 	public void resetDifficulty() {
-		first.resetDifficulty();
-		second.resetDifficulty();
+		tempIterator = model.getIterator();
+		while (tempIterator.hasNext()) {
+			tempIterator.next().resetDifficulty();
+		}
 	}
 }

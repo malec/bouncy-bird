@@ -54,5 +54,10 @@ class Controller implements KeyListener, ActionListener, MouseListener {
         if (e.getKeyCode() == KeyEvent.VK_P) {
             model.gamePause();
         }
+        if(e.getKeyCode()==KeyEvent.VK_H)
+        {
+        	view.gameOver();
+        	System.out.println("Game Over...");
+        }
     }
 }
