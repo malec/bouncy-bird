@@ -15,6 +15,7 @@ class Model {
 	private int score = 0;
 	public LinkedList<Obstacle> obstacleCollection;
 	private Iterator<Obstacle> obstacleIterator;
+	int frames;
 
 	Model() {
 		bird = new Bird();
@@ -27,11 +28,24 @@ class Model {
 
 	public void update() {
 		if (gameIsRunning()) {
-			bird.update();
-			obstacleIterator=obstacleCollection.iterator();
-			while (obstacleIterator.hasNext())// Cycle through the list and update
-			{
-				obstacleIterator.next().update(random);
+			frames++;
+			if (frames % 30 == 0) {
+				// print out a new obstacle every 50 frames.
+				Obstacle newRandom = new Obstacle(random);
+				obstacleCollection.add(newRandom);
+			} else {
+				bird.update();
+				obstacleIterator = obstacleCollection.iterator();
+				boolean removeFirst = false;
+				// Cycle through the list and update
+				while (obstacleIterator.hasNext()) {
+					if (obstacleIterator.next().update(random)) {
+						removeFirst = true;
+					}
+				}
+				if (removeFirst) {
+					obstacleCollection.removeFirst();
+				}
 			}
 		}
 	}

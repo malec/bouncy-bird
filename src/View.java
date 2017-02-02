@@ -12,6 +12,7 @@ class View extends JPanel {
 	Obstacle second;
 	JLabel label;
 	Iterator<Obstacle> tempIterator;
+	int frames=0;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -46,11 +47,10 @@ class View extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-
-		g.setColor(new Color(128, 255, 255));
+		frames++;
+ 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.drawImage(this.model.bird.birdImage, model.bird.bird_x, model.bird.bird_y, null);
-
 		// Iterate through and draw the tubes.
 		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
@@ -68,8 +68,6 @@ class View extends JPanel {
 			while (tempIterator.hasNext()) {
 				tempIterator.next().update(model.random);
 			}
-			// System.out.println(this.first.tube.getHeight(null)+" Is the
-			// height");
 			if (checkCollision()) {
 				System.out.println("Collision!");
 				this.model.scoreReset();
@@ -91,8 +89,8 @@ class View extends JPanel {
 				temp.bypassScore();
 				return true;
 			} else if (temp.allowScore() && this.model.bird.getBounds().intersects(temp.getPassSpace())) {// Update
-																													// the
-																													// score
+																											// the
+																											// score
 				this.model.incrementScore();
 				temp.bypassScore();
 				return false;
