@@ -134,7 +134,7 @@ class Model {
 		return obstacleCollection.iterator();
 	}
 	public void gameOver(){
-		//gameRunning=false;
+		gameRunning=false;
 		gameOver=true;
 	}
 }
