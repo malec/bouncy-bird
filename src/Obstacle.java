@@ -10,9 +10,7 @@ public class Obstacle {
 	public boolean pointUP;
 	public int xPosition = 1100;
 	public int yPosition;
-	public static Image tube = null;
-	private static Image tubeUp = null;
-	private static Image tubeDown = null;
+	public Image tube;
 	private double difficultyIncrease = 0;
 	private int farRightXPosition = 600;
 	private int maxYUpright = 450;
@@ -37,14 +35,11 @@ public class Obstacle {
 	public Obstacle(Random random) {
 		pointUP = random.nextBoolean();
 		if (pointUP) {
-			xPosition = random.nextInt(maxYUpright - minYUpright) + minYUpright;
+			yPosition = random.nextInt(maxYUpright - minYUpright) + minYUpright;
 		} else {
-			yPosition= (random.nextInt(maxYNotUpright - minYNotUpright) + minYNotUpright) * -1;
+			yPosition = (random.nextInt(maxYNotUpright - minYNotUpright) + minYNotUpright) * -1;
 		}
 		setOrientation(pointUP);
-		difficultyIncrease = 0;
-		bypassCollision = false;
-		bypassScore = false;
 	}
 
 	// Return if you should remove from the collection or not.
