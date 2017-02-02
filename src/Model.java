@@ -16,6 +16,7 @@ class Model {
 	public LinkedList<Obstacle> obstacleCollection;
 	private Iterator<Obstacle> obstacleIterator;
 	int frames;
+	public boolean gameOver;
 
 	Model() {
 		bird = new Bird();
@@ -24,6 +25,7 @@ class Model {
 		gameRunning = true;
 		score = 0;
 		obstacleCollection = new LinkedList<Obstacle>();
+		gameOver=false;
 	}
 
 	public void update() {
@@ -34,7 +36,7 @@ class Model {
 				Obstacle newRandom = new Obstacle(random);
 				obstacleCollection.add(newRandom);
 			} else {
-				bird.update();
+  				bird.update();
 				obstacleIterator = obstacleCollection.iterator();
 				boolean removeFirst = false;
 				// Cycle through the list and update
@@ -73,16 +75,22 @@ class Model {
 		Object options[] = { "Resume", "Save", "Load Game" };
 		int dialogResult = JOptionPane.showOptionDialog(null, "Paused. Select an option", "Menu",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+		if(dialogResult==0){
+			this.gameResume();
+		}
 		if (dialogResult == 1) { // Save the game.
 			JOptionPane.showMessageDialog(null, "To come in the future");
+			this.gameResume();
 		} else if (dialogResult == 2) {
 			JOptionPane.showMessageDialog(null, "To come in the future");
+			this.gameResume();
 		} else if (dialogResult == 3) {
 			scoreReset();
+			this.gameResume();
 
 		}
-		this.gameResume();
 	}
+	
 
 	public void gameResume() {
 		this.gameRunning = true;
@@ -124,5 +132,9 @@ class Model {
 
 	public Iterator<Obstacle> getIterator() {
 		return obstacleCollection.iterator();
+	}
+	public void gameOver(){
+		//gameRunning=false;
+		gameOver=true;
 	}
 }

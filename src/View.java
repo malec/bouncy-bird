@@ -57,6 +57,7 @@ class View extends JPanel {
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.drawImage(this.model.bird.birdImage, model.bird.bird_x, model.bird.bird_y, null);
+		g.drawImage(hand.getImage(), hand.getXPosition(), hand.getYPosition(), null);
 		// Iterate through and draw the tubes.
 		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
@@ -84,6 +85,8 @@ class View extends JPanel {
 	}
 
 	void gameOver() {
+		//freeze game
+		model.gameOver();
 		hand.animate(model.bird.bird_y);
 	}
 
@@ -120,9 +123,7 @@ class View extends JPanel {
 	}
 
 	private void decreaseProgressBar() {
-		if (lifeIndicator.getValue() > 30) {
-			lifeIndicator.setValue(lifeIndicator.getValue() - 30);
-		}
+		lifeIndicator.setValue(lifeIndicator.getValue() - 30);
 	}
 
 	private void increaseProgressBar() {
