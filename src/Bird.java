@@ -7,26 +7,32 @@ import java.io.File;
  */
 public class Bird {
     private static int wingflyDuration = 3;
-    private static double verticalVelocityIncrement=-15;
+    private static double verticalVelocityIncrement=-16;
     public int bird_y;
     public int bird_x=20;
     public double dblVerticalVelcoity;
     private int frameCouter;
-    public Image birdImage;
+    public static Image birdImage=null;
     static public Image defaultbirdImage;
 
 
     Bird() {
+    	//Lazy load the image.
+    	if(birdImage==null)
+    	{
+    		//Load the image.
+    		try {
+                defaultbirdImage = ImageIO.read(new File("bird.png"));
+                birdImage=defaultbirdImage;
+            }
+            catch (Exception error)
+            {
+                error.printStackTrace(System.err);
+                System.exit(1);
+            }
+    	}
         frameCouter=0;
-        try {
-            defaultbirdImage = ImageIO.read(new File("bird.png"));
-            birdImage=defaultbirdImage;
-        }
-        catch (Exception error)
-        {
-            error.printStackTrace(System.err);
-            System.exit(1);
-        }
+        
     }
 
     public void update() {

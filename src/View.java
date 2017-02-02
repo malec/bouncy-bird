@@ -35,15 +35,9 @@ class View extends JPanel {
 			System.exit(1);
 		}
 
-		// Set Obstacles
-		// Remove these later
-		first = new Obstacle(true, 500, 200);// remove these later
-		second = new Obstacle(false, 999, -70);
-
 		// Add the first two obstacles to the list.
 		this.model.obstacleCollection.add(new Obstacle(true, 500, 200));// max
-																		// 100
-		this.model.obstacleCollection.add(new Obstacle(false, 999, -70));
+		this.model.obstacleCollection.add(new Obstacle(false, 800, -70));
 	}
 
 	public void paintComponent(Graphics g) {

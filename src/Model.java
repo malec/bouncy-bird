@@ -29,7 +29,7 @@ class Model {
 	public void update() {
 		if (gameIsRunning()) {
 			frames++;
-			if (frames % 30 == 0) {
+			if (frames % 25 == 0) {
 				// print out a new obstacle every 50 frames.
 				Obstacle newRandom = new Obstacle(random);
 				obstacleCollection.add(newRandom);

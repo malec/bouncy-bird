@@ -8,14 +8,14 @@ import java.util.Random;
  */
 public class Obstacle {
 	public boolean pointUP;
-	public int xPosition=600;
+	public int xPosition = 1100;
 	public int yPosition;
 	public Image tube;
 	private double difficultyIncrease = 0;
-	private int farRightXPosition = 1000;
-	private int maxYUpright = 500;
-	private int minYUpright = 100;
-	private int minYNotUpright = 70;
+	private int farRightXPosition = 600;
+	private int maxYUpright = 450;
+	private int minYUpright = 150;
+	private int minYNotUpright = 100;
 	private int maxYNotUpright = 300;
 	private boolean bypassCollision;
 	private boolean bypassScore;
@@ -36,7 +36,6 @@ public class Obstacle {
 		pointUP = random.nextBoolean();
 		if (pointUP) {
 			yPosition = random.nextInt(maxYUpright - minYUpright) + minYUpright;
-			// if(yPosition=<100)
 		} else {
 			yPosition = (random.nextInt(maxYNotUpright - minYNotUpright) + minYNotUpright) * -1;
 		}
@@ -51,9 +50,9 @@ public class Obstacle {
 		} else {
 			// Set the orientation.
 
-			//difficultyIncrease -= .002; Put this somewhere else
+			// difficultyIncrease -= .002; Put this somewhere else
 		}
-		xPosition -= 8 - difficultyIncrease; //Put this somewhere else
+		xPosition -= 4 - difficultyIncrease; // Put this somewhere else
 		return false;
 	}
 
