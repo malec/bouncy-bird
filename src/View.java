@@ -54,7 +54,7 @@ class View extends JPanel {
 		// Iterate through and draw the tubes.
 		tempIterator=model.getIterator();
 		while (tempIterator.hasNext()) {
-			Obstacle temp = model.getIterator().next();
+			Obstacle temp = tempIterator.next();
 			g.drawImage(temp.tube, temp.xPosition, temp.yPosition, null);
 		}
 		// g.drawImage(this.first.tube, this.first.xPosition,
