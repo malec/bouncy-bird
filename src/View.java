@@ -13,6 +13,7 @@ class View extends JPanel {
 	JLabel label;
 	Iterator<Obstacle> tempIterator;
 	int frames=0;
+	JProgressBar lifeIndicator;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -20,12 +21,21 @@ class View extends JPanel {
 		b1 = new JButton("Pause");
 		b1.addActionListener(c);
 		b1.setFocusable(false);
-		this.add(b1);
+		//this.add(b1);
 		label = new JLabel();
 		label.setFocusable(true);
 		label.addKeyListener(c);
-		this.add(label);
 		this.addKeyListener(c);
+		this.add(b1);
+		this.add(label);
+		lifeIndicator = new JProgressBar();
+		lifeIndicator.setValue(100);
+		JPanel panel = new JPanel();
+		panel.setOpaque(false);
+		this.setBorder(BorderFactory.createEmptyBorder(0,250,0,250));
+		panel.setBorder(BorderFactory.createEmptyBorder(380,250,10,250));
+		panel.add(lifeIndicator);
+		this.add(panel);
 
 		// To read the image in.
 		try {
@@ -81,12 +91,13 @@ class View extends JPanel {
 			if (temp.allowCollision() && this.model.bird.getBounds().intersects(temp.getBounds())) {
 				temp.bypassCollision();
 				temp.bypassScore();
+				lifeIndicator.setValue(lifeIndicator.getValue()-30);
 				return true;
-			} else if (temp.allowScore() && this.model.bird.getBounds().intersects(temp.getPassSpace())) {// Update
-																											// the
-																											// score
+			} else if (temp.allowScore() && this.model.bird.getBounds().intersects(temp.getPassSpace())) {
+				//Update the score
 				this.model.incrementScore();
 				temp.bypassScore();
+				lifeIndicator.setValue(lifeIndicator.getValue()+5);
 				return false;
 			}
 		}

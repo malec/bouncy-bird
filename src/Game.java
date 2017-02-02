@@ -1,11 +1,13 @@
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Game extends JFrame {
     View view;
     Model model;
 
     public Game() {
-        model = new Model();
+    	model = new Model();
         Controller controller = new Controller(model, this);
         view = new View(controller, model);
         this.setTitle("Bouncy Bird V 1.0 - Alec Ahlbrandt");
