@@ -75,7 +75,7 @@ class View extends JPanel {
 		if (model.bird.bird_y > bottomBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
 				decreaseProgressBar();
-				System.out.println("Caught");
+				//System.out.println("Caught");
 				collisionFrame++;
 			} else {
 				collisionFrame++;
@@ -91,13 +91,13 @@ class View extends JPanel {
 		if (model.bird.bird_y <= upperBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
 				decreaseProgressBar();
-				System.out.println("Caught");
+				//System.out.println("Caught");
 				collisionFrame++;
 			} else {
 				collisionFrame++;
 				if (collisionFrame >= 20) {
 					decreaseProgressBar();
-					System.out.println("Decreased on interval of 10");
+					//System.out.println("Decreased on interval of 10");
 					collisionFrame = 0;
 				}
 			}
@@ -109,7 +109,7 @@ class View extends JPanel {
 				tempIterator.next().update(model.random);
 			}
 			if (checkCollision()) {
-				System.out.println("Collision!");
+				//System.out.println("Collision!");
 			}
 		}
 		// wrap frame count
