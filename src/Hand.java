@@ -45,13 +45,11 @@ public class Hand {
 			// Pull it down.
 			if (yPosition >= killGameYPosition) {
 				// Game Over
-				System.out.println("Good Game!");
 				System.exit(0);
 			} else {
 				yPosition += handDownSpeed;
 				bird.bird_y += handDownSpeed;
 			}
-
 		}
 
 		// while (yPosition!=killGameYPosition) {
