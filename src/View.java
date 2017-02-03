@@ -15,7 +15,9 @@ class View extends JPanel {
 	private int frames = 0;
 	private JProgressBar lifeIndicator;
 	private int healthIncreaseValue = 5;
-	private int healthDecreaseValue = 40;
+	private int healthDecreaseValue = 25;
+	private int bottomBound = 400;
+	private int upperBound = 10;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -65,6 +67,24 @@ class View extends JPanel {
 			g.drawImage(temp.gettube(), temp.xPosition, temp.yPosition, null);
 		}
 		checkScore();
+		
+		//Decrease the score, and push them off of the boundary
+		//Check the lower bound.
+		
+		if(model.bird.bird_y>bottomBound&&model.gameOver==false){
+			System.out.println("hit the lower bounds of the window .");
+			model.bird.bird_y-=20;
+			//model.bird.jumpOffBound(bottomBound, upperBound);
+			decreaseProgressBar();
+		}
+		
+		//Check the upper bound
+		if(model.bird.bird_y<=upperBound&&model.gameOver==false){
+			System.out.println("hit the upper bounds of the window .");
+			model.bird.bird_y+=20;
+			decreaseProgressBar();
+		}
+		
 		if (this.model.gameIsRunning()) {
 			// Update each obstacle.
 			tempIterator = model.getIterator();
