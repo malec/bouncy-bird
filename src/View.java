@@ -73,7 +73,6 @@ class View extends JPanel {
 			}
 			if (checkCollision()) {
 				System.out.println("Collision!");
-				this.model.scoreReset();
 			}
 		}
 	}
@@ -100,6 +99,7 @@ class View extends JPanel {
 		while (tempIterator.hasNext()) {
 			Obstacle temp = tempIterator.next();
 			if (temp.allowCollision() && this.model.bird.getBounds().intersects(temp.getBounds())) {
+				//gets a collision.
 				temp.bypassCollision();
 				temp.bypassScore();
 				decreaseProgressBar();

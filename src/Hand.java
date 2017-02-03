@@ -11,8 +11,8 @@ public class Hand {
 	public static int killGameYPosition = 550;
 	private boolean handOpen;
 	private Bird bird;
-	private int handUpSpeed=40;
-	private int handDownSpeed=40;
+	private int handUpSpeed = 30;
+	private int handDownSpeed = 30;
 
 	Hand(Bird _bird) {
 		handOpen = true;
@@ -37,7 +37,7 @@ public class Hand {
 	}
 
 	public void animate(int birdYPosition) {
-		if (yPosition >= birdYPosition&&birdYPosition<killGameYPosition) {
+		if (yPosition >= birdYPosition && birdYPosition < killGameYPosition) {
 			yPosition -= handUpSpeed;
 		} else {
 			// Change the image of the hand.
@@ -47,12 +47,11 @@ public class Hand {
 				// Game Over
 				System.out.println("Good Game!");
 				System.exit(0);
-			}
-			else{
+			} else {
 				yPosition += handDownSpeed;
-				bird.bird_y+=handDownSpeed;
+				bird.bird_y += handDownSpeed;
 			}
-			
+
 		}
 
 		// while (yPosition!=killGameYPosition) {
