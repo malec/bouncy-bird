@@ -71,7 +71,7 @@ class View extends JPanel {
 		//Decrease the score, and push them off of the boundary
 		//Check the lower bound.
 		
-		if(model.bird.bird_y>bottomBound&&model.gameOver==false){
+		/*if(model.bird.bird_y>bottomBound&&model.gameOver==false){
 			System.out.println("hit the lower bounds of the window .");
 			model.bird.bird_y-=20;
 			//model.bird.jumpOffBound(bottomBound, upperBound);
@@ -83,7 +83,7 @@ class View extends JPanel {
 			System.out.println("hit the upper bounds of the window .");
 			model.bird.bird_y+=20;
 			decreaseProgressBar();
-		}
+		}*/
 		
 		if (this.model.gameIsRunning()) {
 			// Update each obstacle.

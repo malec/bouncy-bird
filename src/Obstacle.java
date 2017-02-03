@@ -1,7 +1,5 @@
 import javax.imageio.ImageIO;
 
-import com.sun.xml.internal.ws.resources.TubelineassemblyMessages;
-
 import java.awt.*;
 import java.io.File;
 import java.util.Random;
