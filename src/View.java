@@ -14,6 +14,8 @@ class View extends JPanel {
 	private Iterator<Obstacle> tempIterator;
 	private int frames = 0;
 	private JProgressBar lifeIndicator;
+	private int healthIncreaseValue = 5;
+	private int healthDecreaseValue = 40;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -121,12 +123,12 @@ class View extends JPanel {
 	}
 
 	private void decreaseProgressBar() {
-		lifeIndicator.setValue(lifeIndicator.getValue() - 30);
+		lifeIndicator.setValue(lifeIndicator.getValue() - healthDecreaseValue);
 	}
 
 	private void increaseProgressBar() {
 		if (lifeIndicator.getValue() < 100) {
-			lifeIndicator.setValue(lifeIndicator.getValue() + 5);
+			lifeIndicator.setValue(lifeIndicator.getValue() + healthIncreaseValue);
 		}
 	}
 }

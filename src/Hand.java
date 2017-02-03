@@ -10,11 +10,14 @@ public class Hand {
 	private int xPosition = 20;
 	public static int killGameYPosition = 550;
 	private boolean handOpen;
-	//private boolean finished;
+	private Bird bird;
+	private int handUpSpeed=40;
+	private int handDownSpeed=40;
 
-	Hand() {
+	Hand(Bird _bird) {
 		handOpen = true;
-		//finished = false;
+		bird = _bird;
+		// finished = false;
 		if (handOpenImage == null) {
 			try {
 				handOpenImage = ImageIO.read(new File("hand1.png"));
@@ -33,24 +36,35 @@ public class Hand {
 		}
 	}
 
-	public void animate(int birdPosition) {
-		yPosition=birdPosition;
-//			while (yPosition != birdPosition) {
-//				yPosition -= 1;
-//			}
-//			// Change the image.
-//			handOpen = false;
-//			// Pull it down.
-//			while (yPosition!=killGameYPosition) {
-//				yPosition += 10;
-//			}
-//			// Now change the hand image.
-//			// If the animation is finished, exit.
-//			if (yPosition == killGameYPosition) {
-//				System.out.println("done?");
-//				System.exit(0);
-//			}
-		//}
+	public void animate(int birdYPosition) {
+		if (yPosition >= birdYPosition&&birdYPosition<killGameYPosition) {
+			yPosition -= handUpSpeed;
+		} else {
+			// Change the image of the hand.
+			handOpen = false;
+			// Pull it down.
+			if (yPosition >= killGameYPosition) {
+				// Game Over
+				System.out.println("Good Game!");
+				System.exit(0);
+			}
+			else{
+				yPosition += handDownSpeed;
+				bird.bird_y+=handDownSpeed;
+			}
+			
+		}
+
+		// while (yPosition!=killGameYPosition) {
+		// yPosition += 10;
+		// }
+		// // Now change the hand image.
+		// // If the animation is finished, exit.
+		// if (yPosition == killGameYPosition) {
+		// System.out.println("done?");
+		// System.exit(0);
+		// }
+		// }
 	}
 
 	public Image getImage() {
