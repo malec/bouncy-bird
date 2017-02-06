@@ -14,11 +14,12 @@ class View extends JPanel {
 	private Iterator<Obstacle> tempIterator;
 	private int frames = 0;
 	private JProgressBar lifeIndicator;
-	private int healthIncreaseValue = 5;
+	private int healthIncreaseValue = 1;
 	private int healthDecreaseValue = 25;
 	private int bottomBound = 400;
 	private int upperBound = 10;
 	private int collisionFrame;
+	private int scoreIncreaseInterval = 3;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -70,8 +71,30 @@ class View extends JPanel {
 		checkScore();
 
 		// Decrease the score, and push them off of the boundary
-		// Check the lower bound.
+		checkLowerBound();
+		checkUpperBound();
+		
+		if (this.model.gameIsRunning()) {
+			// Update each obstacle.
+			tempIterator = model.getIterator();
+			while (tempIterator.hasNext()) {
+				tempIterator.next().update(model.random);
+			}
+			checkCollision();
+			
+			//Increase the score "over time".
+			if(0==frames%scoreIncreaseInterval){
+				increaseProgressBar();
+				System.out.println("Hit it, and increased.");
+			}
+		}
+		// wrap frame count
+		if (frames >= 1000000) {
+			frames = 0;
+		}
+	}
 
+	private void checkLowerBound() {
 		if (model.bird.bird_y > bottomBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
 				decreaseProgressBar();
@@ -86,8 +109,9 @@ class View extends JPanel {
 				}
 			}
 		}
+	}
 
-		// Check the upper bound
+	private void checkUpperBound() {
 		if (model.bird.bird_y <= upperBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
 				decreaseProgressBar();
@@ -101,20 +125,6 @@ class View extends JPanel {
 					collisionFrame = 0;
 				}
 			}
-		}
-		if (this.model.gameIsRunning()) {
-			// Update each obstacle.
-			tempIterator = model.getIterator();
-			while (tempIterator.hasNext()) {
-				tempIterator.next().update(model.random);
-			}
-			if (checkCollision()) {
-				// System.out.println("Collision!");
-			}
-		}
-		// wrap frame count
-		if (frames >= 1000000) {
-			frames = 0;
 		}
 	}
 
@@ -149,7 +159,7 @@ class View extends JPanel {
 				// Update the score
 				this.model.incrementScore();
 				temp.bypassScore();
-				increaseProgressBar();
+				// increaseProgressBar();
 				return false;
 			}
 		}
