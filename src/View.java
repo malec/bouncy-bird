@@ -85,7 +85,6 @@ class View extends JPanel {
 			//Increase the score "over time".
 			if(0==frames%scoreIncreaseInterval){
 				increaseProgressBar();
-				System.out.println("Hit it, and increased.");
 			}
 		}
 		// wrap frame count
