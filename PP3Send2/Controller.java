@@ -19,14 +19,10 @@ class Controller implements KeyListener, ActionListener, MouseListener {
     }
 
     public void mousePressed(MouseEvent e) {
-		if (model.gameIsRunning()) {
-			model.onClick();
-		}
+        model.setDestination(e.getX(), e.getY());
     }
 
     public void mouseReleased(MouseEvent e) {
-    	model.onRelease();
-    	System.out.println("Released");
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -36,7 +32,7 @@ class Controller implements KeyListener, ActionListener, MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        
+        model.onClick();
     }
 
     void setView(View v) {

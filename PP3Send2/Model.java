@@ -15,7 +15,7 @@ class Model {
 	private int score = 0;
 	public LinkedList<Obstacle> obstacleCollection;
 	private Iterator<Obstacle> obstacleIterator;
-	public int frames;
+	int frames;
 	public boolean gameOver;
 	public Hand hand;
 
@@ -57,12 +57,15 @@ class Model {
 		}
 	}
 
-	public void onClick() {
-		bird.flap();
+	public void setDestination(int x, int y) {
+		// bird.dest_x = x;
+		// bird.dest_y = y;
 	}
 
-	public void onRelease() {
-		bird.release();
+	public void onClick() {
+		if (gameIsRunning()) {
+			bird.flap();
+		}
 	}
 
 	public boolean gameIsRunning() {

@@ -14,7 +14,6 @@ public class Bird {
 	private int frameCouter;
 	public static Image birdImage = null;
 	static public Image defaultbirdImage;
-	public static Image birdFlapImage = null;
 
 	Bird() {
 		// Lazy load the image.
@@ -25,15 +24,6 @@ public class Bird {
 				birdImage = defaultbirdImage;
 			} catch (Exception error) {
 				error.printStackTrace(System.err);
-				System.exit(1);
-			}
-		}
-		if(birdFlapImage==null){
-			try{
-				birdFlapImage = ImageIO.read(new File("bird2.png"));
-			}
-			catch(Exception error){
-				error.printStackTrace();
 				System.exit(1);
 			}
 		}
@@ -49,7 +39,7 @@ public class Bird {
 			frameCouter++;
 			if (frameCouter >= wingflyDuration) {
 				frameCouter = 0;
-				//this.birdImage = defaultbirdImage;
+				this.birdImage = defaultbirdImage;
 			}
 		} else {
 			// Game Fail.
@@ -63,15 +53,11 @@ public class Bird {
 		dblVerticalVelcoity += verticalVelocityIncrement;
 		this.bird_y += dblVerticalVelcoity;
 		try {
-			birdImage = birdFlapImage;
+			birdImage = ImageIO.read(new File("bird2.png"));
 		} catch (Exception error) {
 			error.printStackTrace();
 			System.exit(1);
 		}
-	}
-	public void release(){
-		birdImage=defaultbirdImage;
-		System.out.println("released here");
 	}
 
 	public Rectangle getBounds() {
