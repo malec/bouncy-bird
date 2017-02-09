@@ -48,7 +48,7 @@ public class Hand{
 				System.exit(0);
 			} else {
 				yPosition += handDownSpeed;
-				bird.bird_y += handDownSpeed;
+				bird.yPosition += handDownSpeed;
 			}
 		}
 

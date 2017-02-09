@@ -60,7 +60,7 @@ class View extends JPanel {
 		frames++;
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		g.drawImage(this.model.bird.birdImage, model.bird.bird_x, model.bird.bird_y, null);
+		g.drawImage(this.model.bird.birdImage, model.bird.xPosition, model.bird.yPosition, null);
 		g.drawImage(model.hand.getImage(), model.hand.getXPosition(), model.hand.getYPosition(), null);
 		// Iterate through and draw the tubes.
 		tempIterator = model.getIterator();
@@ -78,7 +78,7 @@ class View extends JPanel {
 			// Update each obstacle.
 			tempIterator = model.getIterator();
 			while (tempIterator.hasNext()) {
-				tempIterator.next().update(model.random);
+				tempIterator.next().update();
 			}
 			checkCollision();
 			
@@ -94,7 +94,7 @@ class View extends JPanel {
 	}
 
 	private void checkLowerBound() {
-		if (model.bird.bird_y > bottomBound && model.gameOver == false) {
+		if (model.bird.yPosition > bottomBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
 				decreaseProgressBar();
 				// System.out.println("Caught");
@@ -111,7 +111,7 @@ class View extends JPanel {
 	}
 
 	private void checkUpperBound() {
-		if (model.bird.bird_y <= upperBound && model.gameOver == false) {
+		if (model.bird.yPosition <= upperBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
 				decreaseProgressBar();
 				// System.out.println("Caught");
@@ -136,7 +136,7 @@ class View extends JPanel {
 	void gameOver() {
 		// freeze game
 		model.gameOver();
-		model.hand.animate(model.bird.bird_y);
+		model.hand.animate(model.bird.yPosition);
 	}
 
 	void removeButton() {

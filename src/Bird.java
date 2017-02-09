@@ -8,8 +8,6 @@ import java.io.File;
 public class Bird extends Sprite{
 	private static int wingflyDuration = 3;
 	private static double verticalVelocityIncrement = -16;
-	public int bird_y = 80;
-	public int bird_x = 20;
 	public double dblVerticalVelcoity;
 	private int frameCouter;
 	public static Image birdImage = null;
@@ -27,6 +25,8 @@ public class Bird extends Sprite{
 				error.printStackTrace(System.err);
 				System.exit(1);
 			}
+			xPosition=20;
+			yPosition=80;
 		}
 		if(birdFlapImage==null){
 			try{
@@ -43,9 +43,9 @@ public class Bird extends Sprite{
 
 	public boolean update() {
 		// Move the bird
-		if (bird_y < 400) {
+		if (yPosition < 400) {
 			dblVerticalVelcoity += wingflyDuration;
-			this.bird_y += dblVerticalVelcoity;
+			yPosition += dblVerticalVelcoity;
 			frameCouter++;
 			if (frameCouter >= wingflyDuration) {
 				frameCouter = 0;
@@ -62,7 +62,7 @@ public class Bird extends Sprite{
 		dblVerticalVelcoity = 0;
 
 		dblVerticalVelcoity += verticalVelocityIncrement;
-		this.bird_y += dblVerticalVelcoity;
+		yPosition += dblVerticalVelcoity;
 		try {
 			birdImage = birdFlapImage;
 		} catch (Exception error) {
@@ -75,14 +75,14 @@ public class Bird extends Sprite{
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(bird_x, bird_y, birdImage.getWidth(null), birdImage.getHeight(null));
+		return new Rectangle(xPosition, yPosition, birdImage.getWidth(null), birdImage.getHeight(null));
 	}
 
 	public void jumpOffBound(int bottomBound, int topBound) {
-		if (bird_y <= topBound) {
-			bird_y += 5;
-		} else if (bird_y >= bottomBound) {
-			bird_y -= 5;
+		if (yPosition <= topBound) {
+			yPosition += 5;
+		} else if (yPosition >= bottomBound) {
+			yPosition -= 5;
 		}
 	}
 }

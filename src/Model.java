@@ -54,7 +54,7 @@ class Model {
 			}
 		}
 		if (gameOver) {
-			hand.animate(bird.bird_y);
+			hand.animate(bird.yPosition);
 		}
 	}
 
