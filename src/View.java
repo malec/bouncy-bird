@@ -52,8 +52,8 @@ class View extends JPanel {
 		}
 
 		// Add the first two obstacles to the list.
-		this.model.obstacleCollection.add(new Obstacle(true, 500, 200));// max
-		this.model.obstacleCollection.add(new Obstacle(false, 800, -70));
+		this.model.obstacleCollection.add(new Obstacle(true, 500, 200,model.random));// max
+		this.model.obstacleCollection.add(new Obstacle(false, 800, -70,model.random));
 	}
 
 	public void paintComponent(Graphics g) {

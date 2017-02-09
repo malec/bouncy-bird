@@ -41,7 +41,7 @@ public class Bird extends Sprite{
 
 	}
 
-	public void update() {
+	public boolean update() {
 		// Move the bird
 		if (bird_y < 400) {
 			dblVerticalVelcoity += wingflyDuration;
@@ -55,6 +55,7 @@ public class Bird extends Sprite{
 			// Game Fail.
 			dblVerticalVelcoity = 0;
 		}
+		return false;
 	}
 
 	public void flap() {

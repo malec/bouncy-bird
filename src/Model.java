@@ -44,7 +44,7 @@ class Model {
 				boolean removeFirst = false;
 				// Cycle through the list and update
 				while (obstacleIterator.hasNext()) {
-					if (obstacleIterator.next().update(random)) {
+					if (obstacleIterator.next().update()) {
 						removeFirst = true;
 					}
 				}

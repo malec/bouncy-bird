@@ -3,7 +3,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class Hand {
+public class Hand{
 	private Image handOpenImage = null;
 	private Image handCloseImage = null;
 	public int yPosition = 500;

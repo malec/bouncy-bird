@@ -7,10 +7,8 @@ import java.util.Random;
 /**
  * Created by alec on 01/24/17.
  */
-public class Obstacle {
+public class Obstacle extends Sprite{
 	public boolean pointUP;
-	public int xPosition = 1100;
-	public int yPosition;
 	public static Image tubeUP = null;
 	public static Image tubeDown = null;
 	private double difficultyIncrease = 0;
@@ -22,8 +20,9 @@ public class Obstacle {
 	private boolean bypassCollision;
 	private boolean bypassScore;
 	private static int birdWidth = 64;
+	private Random random;
 
-	Obstacle(boolean UP, int xpos, int ypos) {
+	Obstacle(boolean UP, int xpos, int ypos,Random _random) {
 		this.pointUP = UP;
 		difficultyIncrease = 0;
 		this.xPosition = xpos;
@@ -31,6 +30,7 @@ public class Obstacle {
 		setOrientation(pointUP);
 		bypassCollision = false;
 		bypassScore = false;
+		random=_random;
 	}
 
 	// Generate a random obstacle
@@ -45,7 +45,7 @@ public class Obstacle {
 	}
 
 	// Return if you should remove from the collection or not.
-	public boolean update(Random random) {
+	public boolean update() {
 		// If the tube is off the screen, the redraw it.
 		if (xPosition < -100) {
 			return true;
