@@ -11,11 +11,10 @@ import java.util.*;
 class Model {
 	public Bird bird;
 	public Random random;
-	private int randomSeed= 9238;
+	private int randomSeed = 9238;
 	private boolean gameRunning;
 	private int score = 0;
-	public LinkedList<Obstacle> obstacleCollection;
-	private Iterator<Obstacle> obstacleIterator;
+	// public LinkedList<Obstacle> obstacleCollection;
 	public int frames;
 	public boolean gameOver;
 	public Hand hand;
@@ -26,7 +25,6 @@ class Model {
 		random.setSeed(13);
 		gameRunning = true;
 		score = 0;
-		obstacleCollection = new LinkedList<Obstacle>();
 		gameOver = false;
 		hand = new Hand(bird);
 	}
@@ -37,19 +35,19 @@ class Model {
 			if (frames % 25 == 0) {
 				// print out a new obstacle every 50 frames.
 				Obstacle newRandom = new Obstacle(random);
-				obstacleCollection.add(newRandom);
+				Obstacle.obstacleCollection.add(newRandom);
 			} else {
 				bird.update();
-				obstacleIterator = obstacleCollection.iterator();
 				boolean removeFirst = false;
 				// Cycle through the list and update
-				while (obstacleIterator.hasNext()) {
-					if (obstacleIterator.next().update()) {
+				Iterator<Obstacle> temp = Obstacle.getIterator();
+				while (temp.hasNext()) {
+					if (temp.next().update()) {
 						removeFirst = true;
 					}
 				}
 				if (removeFirst) {
-					obstacleCollection.removeFirst();
+					Obstacle.obstacleCollection.removeFirst();
 				}
 			}
 		}
@@ -130,10 +128,6 @@ class Model {
 
 	public void scoreReset() {
 		this.score = 0;
-	}
-
-	public Iterator<Obstacle> getIterator() {
-		return obstacleCollection.iterator();
 	}
 
 	public void gameOver() {

@@ -11,7 +11,7 @@ class View extends JPanel {
 	// private Obstacle first;
 	// private Obstacle second;
 	private JLabel label;
-	private Iterator<Obstacle> tempIterator;
+	private Iterator<Sprite> tempIterator;
 	private int frames = 0;
 	private JProgressBar lifeIndicator;
 	private int healthIncreaseValue = 1;
@@ -52,8 +52,8 @@ class View extends JPanel {
 		}
 
 		// Add the first two obstacles to the list.
-		this.model.obstacleCollection.add(new Obstacle(true, 500, 200,model.random));// max
-		this.model.obstacleCollection.add(new Obstacle(false, 800, -70,model.random));
+		Sprite.spriteList.add(new Obstacle(true, 500, 200,model.random));// max
+		Sprite.spriteList.add(new Obstacle(false, 800, -70,model.random));
 	}
 
 	public void paintComponent(Graphics g) {
@@ -63,7 +63,7 @@ class View extends JPanel {
 		g.drawImage(this.model.bird.birdImage, model.bird.xPosition, model.bird.yPosition, null);
 		g.drawImage(model.hand.getImage(), model.hand.getXPosition(), model.hand.getYPosition(), null);
 		// Iterate through and draw the tubes.
-		tempIterator = model.getIterator();
+		tempIterator = Sprite.getIterator();
 		while (tempIterator.hasNext()) {
 			Obstacle temp = tempIterator.next();
 			g.drawImage(temp.gettube(), temp.xPosition, temp.yPosition, null);

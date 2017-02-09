@@ -2,12 +2,14 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.io.File;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
  * Created by alec on 01/24/17.
  */
-public class Obstacle extends Sprite{
+public class Obstacle extends Sprite {
 	public boolean pointUP;
 	public static Image tubeUP = null;
 	public static Image tubeDown = null;
@@ -21,8 +23,10 @@ public class Obstacle extends Sprite{
 	private boolean bypassScore;
 	private static int birdWidth = 64;
 	private Random random;
+	//public static LinkedList<Obstacle> obstacleCollection = new LinkedList<Obstacle>();
+	//public static Iterator<Obstacle> obstacleIterator;
 
-	Obstacle(boolean UP, int xpos, int ypos,Random _random) {
+	Obstacle(boolean UP, int xpos, int ypos, Random _random) {
 		this.pointUP = UP;
 		difficultyIncrease = 0;
 		this.xPosition = xpos;
@@ -30,7 +34,7 @@ public class Obstacle extends Sprite{
 		setOrientation(pointUP);
 		bypassCollision = false;
 		bypassScore = false;
-		random=_random;
+		random = _random;
 	}
 
 	// Generate a random obstacle
@@ -48,6 +52,8 @@ public class Obstacle extends Sprite{
 	public boolean update() {
 		// If the tube is off the screen, the redraw it.
 		if (xPosition < -100) {
+			//Remove from the list.
+			Sprite.spriteList.removeFirst();
 			return true;
 		} else {
 			// Set the orientation.
@@ -119,14 +125,13 @@ public class Obstacle extends Sprite{
 		difficultyIncrease = 0;
 	}
 
-	public void tubeUpdate() {
-		// TODO Auto-generated method stub
-	}
-
 	public Image gettube() {
 		if (pointUP) {
 			return tubeUP;
 		}
 		return tubeDown;
+	}
+	public static Iterator<Obstacle> getIterator() {
+		return obstacleCollection.iterator();
 	}
 }
