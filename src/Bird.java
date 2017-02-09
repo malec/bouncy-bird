@@ -71,7 +71,6 @@ public class Bird {
 	}
 	public void release(){
 		birdImage=defaultbirdImage;
-		System.out.println("released here");
 	}
 
 	public Rectangle getBounds() {

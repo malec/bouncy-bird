@@ -26,7 +26,6 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 
     public void mouseReleased(MouseEvent e) {
     	model.onRelease();
-    	System.out.println("Released");
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -48,12 +47,14 @@ class Controller implements KeyListener, ActionListener, MouseListener {
     }
 
     public void keyPressed(KeyEvent e) {
-
+    	if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            model.onClick();
+        }
     }
 
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            model.onClick();
+            model.onRelease();
         }
         if (e.getKeyCode() == KeyEvent.VK_P) {
             model.gamePause();
