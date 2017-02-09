@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Created by alec on 01/23/17.
  */
-public class Bird {
+public class Bird extends Sprite{
 	private static int wingflyDuration = 3;
 	private static double verticalVelocityIncrement = -16;
 	public int bird_y = 80;

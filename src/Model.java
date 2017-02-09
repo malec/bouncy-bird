@@ -11,6 +11,7 @@ import java.util.*;
 class Model {
 	public Bird bird;
 	public Random random;
+	private int randomSeed= 9238;
 	private boolean gameRunning;
 	private int score = 0;
 	public LinkedList<Obstacle> obstacleCollection;
@@ -21,7 +22,7 @@ class Model {
 
 	Model() {
 		bird = new Bird();
-		random = new Random();
+		random = new Random(randomSeed);
 		random.setSeed(13);
 		gameRunning = true;
 		score = 0;
