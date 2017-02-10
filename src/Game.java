@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +12,7 @@ public class Game extends JFrame {
     	model = new Model();
         Controller controller = new Controller(model, this);
         view = new View(controller, model);
-        this.setTitle("Bouncy Bird V 2.0 - Alec Ahlbrandt");
+        this.setTitle("Bouncy Bird V 4.0 - Alec Ahlbrandt");
         this.setSize(500, 500);
         this.getContentPane().add(view);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

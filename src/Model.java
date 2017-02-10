@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+import java.io.IOException;
+
 //import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
 
 import java.net.InetAddress;
@@ -40,19 +42,21 @@ class Model {
 			Iterator<Sprite> temp = spriteList.iterator();
 			frames++;
 			boolean removeFirst = false;
+			Sprite tempSprite;
 			if (frames % 25 == 0) {
 				// print out a new obstacle every 25 frames.
 				Obstacle newRandom = new Obstacle(random);
 				spriteList.add(newRandom);
+				System.out.println("Printed good obstacle.");
 			} else {
 				while (temp.hasNext()) {
-					if (temp.next().update()) {
-						removeFirst = true;
+					tempSprite = temp.next();
+					if (tempSprite.update()) {
+						if (tempSprite.isObstacle()) {
+							removeFirst = true;
+						}
 					}
 				}
-			}
-			if (removeFirst) {
-				spriteList.removeFirst();
 			}
 		}
 		if (gameOver) {

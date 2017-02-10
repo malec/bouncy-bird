@@ -56,8 +56,10 @@ class View extends JPanel {
 		frames++;
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		//g.drawImage(this.model.bird.birdImage, model.bird.xPosition,model.bird.yPosition, null);
-		//g.drawImage(model.hand.getImage(), model.hand.getXPosition(),model.hand.yPosition,null);
+		// g.drawImage(this.model.bird.birdImage,
+		// model.bird.xPosition,model.bird.yPosition, null);
+		// g.drawImage(model.hand.getImage(),
+		// model.hand.getXPosition(),model.hand.yPosition,null);
 		// model.hand.getYPosition(), null);
 		// Iterate through and draw
 		tempIterator = model.getIterator();
@@ -67,19 +69,12 @@ class View extends JPanel {
 		}
 		checkScore();
 
-		
-		System.out.println("Birdx: "+model.bird.xPosition+" and y is "+model.bird.yPosition);
+		// System.out.println("Birdx: " + model.bird.xPosition + " and y is " + model.bird.yPosition);
 		// Decrease the score, and push them off of the boundary
 		checkLowerBound();
 		checkUpperBound();
 
 		if (this.model.gameIsRunning()) {
-			// Update each obstacle.
-			tempIterator = model.getIterator();
-			while (tempIterator.hasNext()) {
-				tempIterator.next().update();
-			}
-
 			// Increase the score "over time".
 			if (0 == frames % scoreIncreaseInterval) {
 				increaseProgressBar();

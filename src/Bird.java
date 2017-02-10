@@ -79,9 +79,11 @@ public class Bird extends Sprite {
 	}
 
 	public void jumpOffBound(int bottomBound, int topBound) {
-		if (yPosition <= topBound) {
+		if(yPosition<0||yPosition>500){
+			throw new RuntimeException("Shouldn't be jumping off bound");		}
+		if (yPosition <= topBound) {//get off top bound
 			yPosition += 5;
-		} else if (yPosition >= bottomBound) {
+		} else if (yPosition >= bottomBound) {//get off bottom bound
 			yPosition -= 5;
 		}
 	}
@@ -95,7 +97,7 @@ public class Bird extends Sprite {
 	}
 
 	public void drawSprite(Graphics g) {
-		System.out.println("drawing bird");
+		//System.out.println("drawing bird");
 		g.drawImage(getImage(), xPosition, yPosition, null);
 	}
 }
