@@ -46,10 +46,6 @@ public class Bird extends Sprite {
 			dblVerticalVelcoity += wingflyDuration;
 			yPosition += dblVerticalVelcoity;
 			frameCouter++;
-			if (frameCouter >= wingflyDuration) {
-				frameCouter = 0;
-				this.birdImage = defaultbirdImage;
-			}
 		} else {
 			// Game Fail.
 			dblVerticalVelcoity = 0;

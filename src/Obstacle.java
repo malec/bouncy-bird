@@ -26,6 +26,7 @@ public class Obstacle extends Sprite {
 	private boolean bypassScore;
 	private static int birdWidth = 64;
 	private Random random;
+	private static int scrollSpeed = 8;
 	// public static LinkedList<Obstacle> obstacleCollection = new
 	// LinkedList<Obstacle>();
 	// public static Iterator<Obstacle> obstacleIterator;
@@ -49,7 +50,7 @@ public class Obstacle extends Sprite {
 		} else {
 			yPosition = (random.nextInt(maxYNotUpright - minYNotUpright) + minYNotUpright) * -1;
 		}
-		xPosition=1100;
+		xPosition=500;
 		setOrientation(pointUP);
 	}
 
@@ -64,7 +65,7 @@ public class Obstacle extends Sprite {
 
 			// difficultyIncrease -= .002; Put this somewhere else
 		}
-		xPosition -= 4 - difficultyIncrease; // Put this somewhere else
+		xPosition -= scrollSpeed - difficultyIncrease; // Put this somewhere else
 		return false;
 	}
 

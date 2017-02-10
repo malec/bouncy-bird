@@ -32,7 +32,7 @@ class Model {
 		hand = new Hand(bird);
 		spriteList = new LinkedList<Sprite>();
 		spriteList.add(new Obstacle(true, 500, 200, random));// max
-		spriteList.add(new Obstacle(false, 800, -70, random));
+		//spriteList.add(new Obstacle(false, 800, -70, random));
 		spriteList.add(new Hand(bird));
 		spriteList.add(bird);
 	}
@@ -43,7 +43,7 @@ class Model {
 			frames++;
 			boolean removeFirst = false;
 			Sprite tempSprite;
-			if (frames % 25 == 0) {
+			if (frames % 50 == 0) {
 				// print out a new obstacle every 25 frames.
 				Obstacle newRandom = new Obstacle(random);
 				spriteList.add(newRandom);
