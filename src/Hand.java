@@ -1,13 +1,12 @@
- import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class Hand{
+public class Hand extends Sprite {
 	private Image handOpenImage = null;
 	private Image handCloseImage = null;
-	public int yPosition = 500;
-	private int xPosition = 20;
 	public static int killGameYPosition = 550;
 	private boolean handOpen;
 	private Bird bird;
@@ -34,6 +33,8 @@ public class Hand{
 				System.exit(1);
 			}
 		}
+		xPosition = bird.xPosition;
+		yPosition = 500;
 	}
 
 	public void animate(int birdYPosition) {
@@ -77,5 +78,17 @@ public class Hand{
 
 	public int getYPosition() {
 		return yPosition;
+	}
+
+	public Boolean isObstacle() {
+		return false;
+	}
+
+	public boolean update() {
+		return false;
+	}
+
+	public void drawSprite(Graphics g) {
+		g.drawImage(getImage(),xPosition,yPosition,null);
 	}
 }

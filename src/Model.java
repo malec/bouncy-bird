@@ -18,6 +18,7 @@ class Model {
 	public int frames;
 	public boolean gameOver;
 	public Hand hand;
+	public LinkedList<Sprite> spriteList;
 
 	Model() {
 		bird = new Bird();
@@ -27,28 +28,31 @@ class Model {
 		score = 0;
 		gameOver = false;
 		hand = new Hand(bird);
+		spriteList = new LinkedList<Sprite>();
+		spriteList.add(new Obstacle(true, 500, 200, random));// max
+		spriteList.add(new Obstacle(false, 800, -70, random));
+		spriteList.add(new Hand(bird));
+		spriteList.add(bird);
 	}
 
 	public void update() {
 		if (gameIsRunning()) {
+			Iterator<Sprite> temp = spriteList.iterator();
 			frames++;
+			boolean removeFirst = false;
 			if (frames % 25 == 0) {
-				// print out a new obstacle every 50 frames.
+				// print out a new obstacle every 25 frames.
 				Obstacle newRandom = new Obstacle(random);
-				Obstacle.obstacleCollection.add(newRandom);
+				spriteList.add(newRandom);
 			} else {
-				bird.update();
-				boolean removeFirst = false;
-				// Cycle through the list and update
-				Iterator<Obstacle> temp = Obstacle.getIterator();
 				while (temp.hasNext()) {
 					if (temp.next().update()) {
 						removeFirst = true;
 					}
 				}
-				if (removeFirst) {
-					Obstacle.obstacleCollection.removeFirst();
-				}
+			}
+			if (removeFirst) {
+				spriteList.removeFirst();
 			}
 		}
 		if (gameOver) {
@@ -133,5 +137,9 @@ class Model {
 	public void gameOver() {
 		gameRunning = false;
 		gameOver = true;
+	}
+
+	public Iterator<Sprite> getIterator() {
+		return spriteList.iterator();
 	}
 }

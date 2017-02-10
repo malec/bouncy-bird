@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Created by alec on 01/23/17.
  */
-public class Bird extends Sprite{
+public class Bird extends Sprite {
 	private static int wingflyDuration = 3;
 	private static double verticalVelocityIncrement = -16;
 	public double dblVerticalVelcoity;
@@ -25,14 +25,13 @@ public class Bird extends Sprite{
 				error.printStackTrace(System.err);
 				System.exit(1);
 			}
-			xPosition=20;
-			yPosition=80;
+			xPosition = 20;
+			// yPosition=80;
 		}
-		if(birdFlapImage==null){
-			try{
+		if (birdFlapImage == null) {
+			try {
 				birdFlapImage = ImageIO.read(new File("bird2.png"));
-			}
-			catch(Exception error){
+			} catch (Exception error) {
 				error.printStackTrace();
 				System.exit(1);
 			}
@@ -49,7 +48,7 @@ public class Bird extends Sprite{
 			frameCouter++;
 			if (frameCouter >= wingflyDuration) {
 				frameCouter = 0;
-				//this.birdImage = defaultbirdImage;
+				this.birdImage = defaultbirdImage;
 			}
 		} else {
 			// Game Fail.
@@ -70,8 +69,9 @@ public class Bird extends Sprite{
 			System.exit(1);
 		}
 	}
-	public void release(){
-		birdImage=defaultbirdImage;
+
+	public void release() {
+		birdImage = defaultbirdImage;
 	}
 
 	public Rectangle getBounds() {
@@ -84,5 +84,18 @@ public class Bird extends Sprite{
 		} else if (yPosition >= bottomBound) {
 			yPosition -= 5;
 		}
+	}
+
+	public Image getImage() {
+		return birdImage;
+	}
+
+	public Boolean isObstacle() {
+		return false;
+	}
+
+	public void drawSprite(Graphics g) {
+		System.out.println("drawing bird");
+		g.drawImage(getImage(), xPosition, yPosition, null);
 	}
 }

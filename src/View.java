@@ -50,40 +50,38 @@ class View extends JPanel {
 			e.printStackTrace(System.err);
 			System.exit(1);
 		}
-
-		// Add the first two obstacles to the list.
-		Sprite.spriteList.add(new Obstacle(true, 500, 200,model.random));// max
-		Sprite.spriteList.add(new Obstacle(false, 800, -70,model.random));
 	}
 
 	public void paintComponent(Graphics g) {
 		frames++;
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		g.drawImage(this.model.bird.birdImage, model.bird.xPosition, model.bird.yPosition, null);
-		g.drawImage(model.hand.getImage(), model.hand.getXPosition(), model.hand.getYPosition(), null);
-		// Iterate through and draw the tubes.
-		tempIterator = Sprite.getIterator();
+		//g.drawImage(this.model.bird.birdImage, model.bird.xPosition,model.bird.yPosition, null);
+		//g.drawImage(model.hand.getImage(), model.hand.getXPosition(),model.hand.yPosition,null);
+		// model.hand.getYPosition(), null);
+		// Iterate through and draw
+		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
-			Obstacle temp = tempIterator.next();
-			g.drawImage(temp.gettube(), temp.xPosition, temp.yPosition, null);
+			Sprite temp = tempIterator.next();
+			temp.drawSprite(g);
 		}
 		checkScore();
 
+		
+		System.out.println("Birdx: "+model.bird.xPosition+" and y is "+model.bird.yPosition);
 		// Decrease the score, and push them off of the boundary
 		checkLowerBound();
 		checkUpperBound();
-		
+
 		if (this.model.gameIsRunning()) {
 			// Update each obstacle.
 			tempIterator = model.getIterator();
 			while (tempIterator.hasNext()) {
 				tempIterator.next().update();
 			}
-			checkCollision();
-			
-			//Increase the score "over time".
-			if(0==frames%scoreIncreaseInterval){
+
+			// Increase the score "over time".
+			if (0 == frames % scoreIncreaseInterval) {
 				increaseProgressBar();
 			}
 		}
@@ -144,32 +142,20 @@ class View extends JPanel {
 		this.repaint();
 	}
 
-	private boolean checkCollision() {
-		tempIterator = model.getIterator();
-		while (tempIterator.hasNext()) {
-			Obstacle temp = tempIterator.next();
-			if (temp.allowCollision() && this.model.bird.getBounds().intersects(temp.getBounds())) {
-				// gets a collision.
-				temp.bypassCollision();
-				temp.bypassScore();
-				decreaseProgressBar();
-				return true;
-			} else if (temp.allowScore() && this.model.bird.getBounds().intersects(temp.getPassSpace())) {
-				// Update the score
-				this.model.incrementScore();
-				temp.bypassScore();
-				// increaseProgressBar();
-				return false;
-			}
-		}
-		return false;
-	}
+	/*
+	 * private boolean checkCollision() { tempIterator = model.getIterator();
+	 * while (tempIterator.hasNext()) { Obstacle temp = tempIterator.next(); if
+	 * (temp.allowCollision() &&
+	 * this.model.bird.getBounds().intersects(temp.getBounds())) { // gets a
+	 * collision. temp.bypassCollision(); temp.bypassScore();
+	 * decreaseProgressBar(); return true; } else if (temp.allowScore() &&
+	 * this.model.bird.getBounds().intersects(temp.getPassSpace())) { // Update
+	 * the score this.model.incrementScore(); temp.bypassScore(); //
+	 * increaseProgressBar(); return false; } } return false; }
+	 */
 
 	public void resetDifficulty() {
-		tempIterator = model.getIterator();
-		while (tempIterator.hasNext()) {
-			tempIterator.next().resetDifficulty();
-		}
+		Obstacle.resetDifficulty();
 	}
 
 	private void decreaseProgressBar() {

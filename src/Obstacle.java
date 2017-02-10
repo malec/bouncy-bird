@@ -1,5 +1,7 @@
 import javax.imageio.ImageIO;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.awt.*;
 import java.io.File;
 import java.util.Iterator;
@@ -11,9 +13,10 @@ import java.util.Random;
  */
 public class Obstacle extends Sprite {
 	public boolean pointUP;
+	public static Image spriteImage;
 	public static Image tubeUP = null;
 	public static Image tubeDown = null;
-	private double difficultyIncrease = 0;
+	private static double difficultyIncrease = 0;
 	private int farRightXPosition = 600;
 	private int maxYUpright = 450;
 	private int minYUpright = 150;
@@ -23,8 +26,9 @@ public class Obstacle extends Sprite {
 	private boolean bypassScore;
 	private static int birdWidth = 64;
 	private Random random;
-	//public static LinkedList<Obstacle> obstacleCollection = new LinkedList<Obstacle>();
-	//public static Iterator<Obstacle> obstacleIterator;
+	// public static LinkedList<Obstacle> obstacleCollection = new
+	// LinkedList<Obstacle>();
+	// public static Iterator<Obstacle> obstacleIterator;
 
 	Obstacle(boolean UP, int xpos, int ypos, Random _random) {
 		this.pointUP = UP;
@@ -45,15 +49,15 @@ public class Obstacle extends Sprite {
 		} else {
 			yPosition = (random.nextInt(maxYNotUpright - minYNotUpright) + minYNotUpright) * -1;
 		}
+		xPosition=1100;
 		setOrientation(pointUP);
 	}
 
-	// Return if you should remove from the collection or not.
+	// Return true if you should remove from the collection.
 	public boolean update() {
 		// If the tube is off the screen, the redraw it.
 		if (xPosition < -100) {
-			//Remove from the list.
-			Sprite.spriteList.removeFirst();
+			// Remove from the list so return true
 			return true;
 		} else {
 			// Set the orientation.
@@ -86,7 +90,7 @@ public class Obstacle extends Sprite {
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(this.xPosition, this.yPosition, gettube().getWidth(null), gettube().getHeight(null));
+		return new Rectangle(this.xPosition, this.yPosition, getImage().getWidth(null), getImage().getHeight(null));
 	}
 
 	public boolean allowCollision() {
@@ -110,28 +114,32 @@ public class Obstacle extends Sprite {
 		// this.xPosition+this.tube.getWidth(null)+birdWidth+5 add score once
 		// he's clear of the tube. 5 px is arbitrary
 		if (!pointUP) {
-			return new Rectangle(this.xPosition + this.gettube().getWidth(null) + birdWidth + 5,
-					this.yPosition + this.gettube().getHeight(null), this.gettube().getWidth(null),
-					500 - this.yPosition + this.gettube().getHeight(null));
+			return new Rectangle(this.xPosition + this.getImage().getWidth(null) + birdWidth + 5,
+					this.yPosition + this.getImage().getHeight(null), this.getImage().getWidth(null),
+					500 - this.yPosition + this.getImage().getHeight(null));
 		}
 		if (pointUP) {
-			return new Rectangle(this.xPosition + this.gettube().getWidth(null) + birdWidth + 5, 0,
-					this.gettube().getWidth(null), this.yPosition);
+			return new Rectangle(this.xPosition + this.getImage().getWidth(null) + birdWidth + 5, 0,
+					this.getImage().getWidth(null), this.yPosition);
 		}
-		return null; // Not initialized?
+		throw new RuntimeException("Rectangle Orientation not initialized");
 	}
 
-	public void resetDifficulty() {
+	public static void resetDifficulty() {
 		difficultyIncrease = 0;
 	}
 
-	public Image gettube() {
+	public Image getImage() {
 		if (pointUP) {
 			return tubeUP;
 		}
 		return tubeDown;
 	}
-	public static Iterator<Obstacle> getIterator() {
-		return obstacleCollection.iterator();
+
+	public Boolean isObstacle() {
+		return true;
+	}
+	public void drawSprite(Graphics g){
+		g.drawImage(getImage(),xPosition,yPosition,null);
 	}
 }
