@@ -18,7 +18,7 @@ class Model {
 	public Hand hand;
 	public LinkedList<Sprite> spriteList;
 	private static int health;
-	private static int healthDecrement = 20;
+	private static int healthDecrement = 15;
 	double healthTick = 0;
 
 	Model() {

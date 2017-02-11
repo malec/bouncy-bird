@@ -12,11 +12,7 @@ class View extends JPanel {
 	// private Obstacle second;
 	private JLabel label;
 	private Iterator<Sprite> tempIterator;
-	private int frames = 0;
 	private JProgressBar lifeIndicator;
-	private int bottomBound = 400;
-	private int upperBound = 10;
-	private int collisionFrame;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -50,7 +46,6 @@ class View extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		frames++;
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		tempIterator = model.getIterator();
@@ -59,44 +54,8 @@ class View extends JPanel {
 			temp.drawSprite(g);
 		}
 		checkScore();
-		checkLowerBound();
-		checkUpperBound();
-		// wrap frame count
-		if (frames >= 1000000) {
-			frames = 0;
-		}
-	}
-
-	private void checkLowerBound() {
-		if (model.bird.yPosition > bottomBound && model.gameOver == false) {
-			if (collisionFrame == 0) {
-				model.decreaseHealth();
-				collisionFrame++;
-			} else {
-				collisionFrame++;
-				if (collisionFrame >= 20) {
-					model.decreaseHealth();
-					collisionFrame = 0;
-				}
-			}
-		}
-	}
-
-	private void checkUpperBound() {
-		if (model.bird.yPosition <= upperBound && model.gameOver == false) {
-			if (collisionFrame == 0) {
-				model.decreaseHealth();
-				// System.out.println("Caught");
-				collisionFrame++;
-			} else {
-				collisionFrame++;
-				if (collisionFrame >= 20) {
-					model.decreaseHealth();
-					// System.out.println("Decreased on interval of 10");
-					collisionFrame = 0;
-				}
-			}
-		}
+		//checkLowerBound();
+		//checkUpperBound();
 	}
 
 	private void checkScore() {

@@ -16,6 +16,9 @@ public class Bird extends Sprite {
 	public static Image birdFlapImage = null;
 	private Model model;
 	private static Boolean allowCollision;
+	private int collisionFrame = 0;
+	private int bottomBound = 400;
+	private int upperBound = 10;
 
 	Bird(Model m) {
 		// Lazy load the image.
@@ -45,6 +48,7 @@ public class Bird extends Sprite {
 
 	public boolean update() {
 		if (Model.gameIsRunning()) {
+			checkBounds();
 			// Move the bird
 			if (yPosition < 400) {
 				dblVerticalVelcoity += wingflyDuration;
@@ -63,6 +67,11 @@ public class Bird extends Sprite {
 		 * System.out.println("Collision reset"); } } }
 		 */
 		return false;
+	}
+
+	private void checkBounds() {
+		checkUpperBound();
+		checkLowerBound();
 	}
 
 	public void flap() {
@@ -138,5 +147,36 @@ public class Bird extends Sprite {
 
 	public void resetCollision() {
 		allowCollision = true;
+	}
+	private void checkLowerBound() {
+		if (model.bird.yPosition > bottomBound && model.gameOver == false) {
+			if (collisionFrame == 0) {
+				model.decreaseHealth();
+				collisionFrame++;
+			} else {
+				collisionFrame++;
+				if (collisionFrame >= 20) {
+					model.decreaseHealth();
+					collisionFrame = 0;
+				}
+			}
+		}
+	}
+
+	private void checkUpperBound() {
+		if (model.bird.yPosition <= upperBound && model.gameOver == false) {
+			if (collisionFrame == 0) {
+				model.decreaseHealth();
+				// System.out.println("Caught");
+				collisionFrame++;
+			} else {
+				collisionFrame++;
+				if (collisionFrame >= 20) {
+					model.decreaseHealth();
+					// System.out.println("Decreased on interval of 10");
+					collisionFrame = 0;
+				}
+			}
+		}
 	}
 }

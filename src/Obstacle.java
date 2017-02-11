@@ -62,9 +62,9 @@ public class Obstacle extends Sprite {
 				return true;
 			} else {
 				if (yDestination == 0 ) {
-					//The tubes moving, so dont allow collisions.
+					//The tubes moving, so don't allow collisions.
 					bypassCollision=true;
-						yPosition += 30;
+						yPosition += 10;
 						yPosition += yVelocity;
 						yVelocity += 1;
 				}
