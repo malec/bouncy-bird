@@ -13,13 +13,15 @@ class Model {
 	private static boolean gameRunning;
 	private int score = 0;
 	// public LinkedList<Obstacle> obstacleCollection;
-	public int frames;
+	private int frames;
 	public boolean gameOver;
 	public Hand hand;
 	public LinkedList<Sprite> spriteList;
 	private static int health;
 	private static int healthDecrement = 15;
 	double healthTick = 0;
+	private int spawnFrequency = 30;
+	private int difficultyIncreaseFrequency = 200;
 
 	Model() {
 		bird = new Bird(this);
@@ -38,8 +40,9 @@ class Model {
 	}
 
 	public void update() {
-		frames++;
 		if (gameIsRunning()) {
+			frames++;
+			System.out.println("Frames: " + frames);
 			if (bird.checkCollision()) {
 				scoreReset();
 				decreaseHealth();
@@ -47,7 +50,7 @@ class Model {
 			increaseProgressBar();
 			Iterator<Sprite> temp = spriteList.iterator();
 			Sprite tempSprite;
-			if (frames % 30 == 0) {
+			if (frames % spawnFrequency == 0) {
 				// print out a new obstacle every 25 frames.
 				Obstacle newRandom = new Obstacle(random);
 				spriteList.add(newRandom);
@@ -62,6 +65,15 @@ class Model {
 		}
 		if (gameOver) {
 			hand.animate(bird.yPosition);
+		}
+		// To prevent overflow.
+		if (frames >= difficultyIncreaseFrequency) {
+			frames = 0;
+			if (spawnFrequency > 10) {
+				spawnFrequency--;
+			} else {
+				Obstacle.increaseDifficulty();
+			}
 		}
 	}
 

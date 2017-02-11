@@ -33,7 +33,7 @@ public class Game extends JFrame {
     public void reset()
     {
         model.scoreReset();
-        view.resetDifficulty();
+        Obstacle.resetDifficulty();
     }
 
     public static void main(String[] args) {

@@ -75,8 +75,4 @@ class View extends JPanel {
 		this.remove(b1);
 		this.repaint();
 	}
-
-	public void resetDifficulty() {
-		Obstacle.resetDifficulty();
-	}
 }

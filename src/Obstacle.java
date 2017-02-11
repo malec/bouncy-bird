@@ -11,7 +11,6 @@ public class Obstacle extends Sprite {
 	public static Image spriteImage;
 	public static Image tubeUP = null;
 	public static Image tubeDown = null;
-	private static double difficultyIncrease = 0;
 	private int minYUpright = 150;
 	private int minYNotUpright = 100;
 	private int maxYNotUpright = 300;
@@ -28,7 +27,6 @@ public class Obstacle extends Sprite {
 
 	Obstacle(boolean UP, int xpos, int ypos, Random _random) {
 		this.pointUP = UP;
-		difficultyIncrease = 0;
 		this.xPosition = xpos;
 		this.yPosition = ypos;
 		setOrientation(pointUP);
@@ -69,7 +67,7 @@ public class Obstacle extends Sprite {
 						yVelocity += 1;
 				}
 			}
-			xPosition -= scrollSpeed - difficultyIncrease; // Put this somewhere
+			xPosition -= scrollSpeed; // Put this somewhere
 		} // else
 		return false;
 	}
@@ -132,7 +130,7 @@ public class Obstacle extends Sprite {
 	}
 
 	public static void resetDifficulty() {
-		difficultyIncrease = 0;
+		scrollSpeed = 7;
 	}
 
 	public Image getImage() {
@@ -148,5 +146,10 @@ public class Obstacle extends Sprite {
 
 	public void drawSprite(Graphics g) {
 		g.drawImage(getImage(), xPosition, yPosition, null);
+	}
+
+	public static void increaseDifficulty() {
+		scrollSpeed++;
+		System.out.println("Increased difficulty");
 	}
 }
