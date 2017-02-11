@@ -1,8 +1,4 @@
-import java.io.IOException;
-
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Game extends JFrame {
     View view;

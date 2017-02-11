@@ -1,7 +1,5 @@
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.Iterator;
-import java.util.LinkedList;
 
 public abstract class Sprite {
 	public int xPosition;// Obstacle was 1100

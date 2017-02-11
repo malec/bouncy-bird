@@ -1,11 +1,5 @@
 import javax.swing.*;
 
-import com.sun.xml.internal.fastinfoset.algorithm.HexadecimalEncodingAlgorithm;
-
-import java.io.IOException;
-
-//import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
-
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;

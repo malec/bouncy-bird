@@ -1,11 +1,6 @@
 import javax.imageio.ImageIO;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.awt.*;
 import java.io.File;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Random;
 
 /**
