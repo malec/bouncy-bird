@@ -14,7 +14,7 @@ class Model {
 	public Bird bird;
 	public Random random;
 	private int randomSeed = 9238;
-	private boolean gameRunning;
+	private static boolean gameRunning;
 	private int score = 0;
 	// public LinkedList<Obstacle> obstacleCollection;
 	public int frames;
@@ -23,7 +23,7 @@ class Model {
 	public LinkedList<Sprite> spriteList;
 
 	Model() {
-		bird = new Bird();
+		bird = new Bird(this);
 		random = new Random(randomSeed);
 		random.setSeed(13);
 		gameRunning = true;
@@ -32,13 +32,14 @@ class Model {
 		hand = new Hand(bird);
 		spriteList = new LinkedList<Sprite>();
 		spriteList.add(new Obstacle(true, 500, 200, random));// max
-		//spriteList.add(new Obstacle(false, 800, -70, random));
-		spriteList.add(new Hand(bird));
+		// spriteList.add(new Obstacle(false, 800, -70, random));
 		spriteList.add(bird);
+		spriteList.add(hand);
 	}
 
 	public void update() {
 		if (gameIsRunning()) {
+			bird.checkCollision();
 			Iterator<Sprite> temp = spriteList.iterator();
 			frames++;
 			boolean removeFirst = false;
@@ -47,7 +48,6 @@ class Model {
 				// print out a new obstacle every 25 frames.
 				Obstacle newRandom = new Obstacle(random);
 				spriteList.add(newRandom);
-				System.out.println("Printed good obstacle.");
 			} else {
 				while (temp.hasNext()) {
 					tempSprite = temp.next();
@@ -72,7 +72,7 @@ class Model {
 		bird.release();
 	}
 
-	public boolean gameIsRunning() {
+	public static boolean gameIsRunning() {
 		return gameRunning;
 	}
 
@@ -131,6 +131,7 @@ class Model {
 
 	public void incrementScore() {
 		score++;
+		bird.resetCollision();
 		System.out.println("SCORE++. Score: " + score);
 	}
 

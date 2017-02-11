@@ -26,7 +26,8 @@ public class Obstacle extends Sprite {
 	private boolean bypassScore;
 	private static int birdWidth = 64;
 	private Random random;
-	private static int scrollSpeed = 8;
+	private static int scrollSpeed = 9;
+	private static int previousYPosition;
 	// public static LinkedList<Obstacle> obstacleCollection = new
 	// LinkedList<Obstacle>();
 	// public static Iterator<Obstacle> obstacleIterator;
@@ -40,32 +41,37 @@ public class Obstacle extends Sprite {
 		bypassCollision = false;
 		bypassScore = false;
 		random = _random;
+		previousYPosition = ypos;
 	}
 
 	// Generate a random obstacle
 	public Obstacle(Random random) {
 		pointUP = random.nextBoolean();
 		if (pointUP) {
-			yPosition = random.nextInt(maxYUpright - minYUpright) + minYUpright;
+			yPosition = random.nextInt(previousYPosition) + minYUpright;
+			previousYPosition = yPosition;
 		} else {
 			yPosition = (random.nextInt(maxYNotUpright - minYNotUpright) + minYNotUpright) * -1;
+			previousYPosition = yPosition + getImage().getHeight(null);
 		}
-		xPosition=500;
+		xPosition = 500;
 		setOrientation(pointUP);
 	}
 
 	// Return true if you should remove from the collection.
 	public boolean update() {
-		// If the tube is off the screen, the redraw it.
-		if (xPosition < -100) {
-			// Remove from the list so return true
-			return true;
-		} else {
-			// Set the orientation.
+		if (Model.gameIsRunning()) {
+			// If the tube is off the screen, the redraw it.
+			if (xPosition < -100) {
+				// Remove from the list so return true
+				return true;
+			} else {
+				// Set the orientation.
 
-			// difficultyIncrease -= .002; Put this somewhere else
-		}
-		xPosition -= scrollSpeed - difficultyIncrease; // Put this somewhere else
+				// difficultyIncrease -= .002; Put this somewhere else
+			}
+			xPosition -= scrollSpeed - difficultyIncrease; // Put this somewhere
+		} // else
 		return false;
 	}
 
@@ -140,7 +146,8 @@ public class Obstacle extends Sprite {
 	public Boolean isObstacle() {
 		return true;
 	}
-	public void drawSprite(Graphics g){
-		g.drawImage(getImage(),xPosition,yPosition,null);
+
+	public void drawSprite(Graphics g) {
+		g.drawImage(getImage(), xPosition, yPosition, null);
 	}
 }

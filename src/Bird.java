@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
+import java.util.Iterator;
 
 /**
  * Created by alec on 01/23/17.
@@ -13,8 +14,10 @@ public class Bird extends Sprite {
 	public static Image birdImage = null;
 	static public Image defaultbirdImage;
 	public static Image birdFlapImage = null;
+	private Model model;
+	private static Boolean allowCollision;
 
-	Bird() {
+	Bird(Model m) {
 		// Lazy load the image.
 		if (birdImage == null) {
 			// Load the image.
@@ -37,19 +40,29 @@ public class Bird extends Sprite {
 			}
 		}
 		frameCouter = 0;
-
+		allowCollision = true;
+		model = m;
 	}
 
 	public boolean update() {
-		// Move the bird
-		if (yPosition < 400) {
-			dblVerticalVelcoity += wingflyDuration;
-			yPosition += dblVerticalVelcoity;
-			frameCouter++;
-		} else {
-			// Game Fail.
-			dblVerticalVelcoity = 0;
+		if (Model.gameIsRunning()) {
+			// Move the bird
+			if (yPosition < 400) {
+				dblVerticalVelcoity += wingflyDuration;
+				yPosition += dblVerticalVelcoity;
+				frameCouter++;
+			} else {
+				// Game Fail.
+				dblVerticalVelcoity = 0;
+			}
 		}
+		/*
+		 * Iterator<Sprite> spriteIterator = model.getIterator(); while
+		 * (spriteIterator.hasNext()) { Sprite temp = spriteIterator.next(); if
+		 * (temp.isObstacle()) { Obstacle tempObs = (Obstacle) temp; if
+		 * (getBounds().intersects(tempObs.getPassSpace())) { resetCollision();
+		 * System.out.println("Collision reset"); } } }
+		 */
 		return false;
 	}
 
@@ -75,11 +88,12 @@ public class Bird extends Sprite {
 	}
 
 	public void jumpOffBound(int bottomBound, int topBound) {
-		if(yPosition<0||yPosition>500){
-			throw new RuntimeException("Shouldn't be jumping off bound");		}
-		if (yPosition <= topBound) {//get off top bound
+		if (yPosition < 0 || yPosition > 500) {
+			throw new RuntimeException("Shouldn't be jumping off bound");
+		}
+		if (yPosition <= topBound) {// get off top bound
 			yPosition += 5;
-		} else if (yPosition >= bottomBound) {//get off bottom bound
+		} else if (yPosition >= bottomBound) {// get off bottom bound
 			yPosition -= 5;
 		}
 	}
@@ -93,7 +107,30 @@ public class Bird extends Sprite {
 	}
 
 	public void drawSprite(Graphics g) {
-		//System.out.println("drawing bird");
+		// System.out.println("drawing bird");
 		g.drawImage(getImage(), xPosition, yPosition, null);
+
+	}
+
+	public boolean checkCollision() {
+		Iterator<Sprite> temp = model.getIterator();
+		while (temp.hasNext()) {
+			Sprite next = temp.next();
+			if (this.doesCollide(next)) {
+				if (next.isObstacle()) {
+					Obstacle tempObs = (Obstacle) next;
+					if (tempObs.allowCollision()) {
+						System.out.println("Collision");
+						tempObs.bypassCollision();
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public void resetCollision() {
+		allowCollision = true;
 	}
 }
