@@ -160,9 +160,9 @@ class Model {
 
 	private void increaseProgressBar() {
 		if (health < 100) {
-			healthTick += .5;
-			if (healthTick % 5 == 0) {
-				health += 2;
+			healthTick += .25;
+			if (healthTick % 2 == 0) {
+				health += 3;
 			}
 			if (healthTick > 5) {
 				healthTick = 0;
@@ -171,6 +171,6 @@ class Model {
 	}
 
 	public void spawnChuckNorris() {
-		spriteList.add(new ChuckNorris());
+		spriteList.add(new ChuckNorris(this));
 	}
 }

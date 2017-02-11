@@ -20,6 +20,8 @@ public class Obstacle extends Sprite {
 	private static int birdWidth = 64;
 	private static int scrollSpeed = 7;
 	private static int previousYPosition;
+	public int yDestination;
+	private double yVelocity = 0;
 	// public static LinkedList<Obstacle> obstacleCollection = new
 	// LinkedList<Obstacle>();
 	// public static Iterator<Obstacle> obstacleIterator;
@@ -33,6 +35,7 @@ public class Obstacle extends Sprite {
 		bypassCollision = false;
 		bypassScore = false;
 		previousYPosition = ypos;
+		yDestination = ypos;
 	}
 
 	// Generate a random obstacle
@@ -47,6 +50,7 @@ public class Obstacle extends Sprite {
 		}
 		xPosition = 500;
 		setOrientation(pointUP);
+		yDestination = yPosition;
 	}
 
 	// Return true if you should remove from the collection.
@@ -57,9 +61,13 @@ public class Obstacle extends Sprite {
 				// Remove from the list so return true
 				return true;
 			} else {
-				// Set the orientation.
-
-				// difficultyIncrease -= .002; Put this somewhere else
+				if (yDestination == 0 ) {
+					//The tubes moving, so dont allow collisions.
+					bypassCollision=true;
+						yPosition += 30;
+						yPosition += yVelocity;
+						yVelocity += 1;
+				}
 			}
 			xPosition -= scrollSpeed - difficultyIncrease; // Put this somewhere
 		} // else

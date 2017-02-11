@@ -40,6 +40,8 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 		if (e.getButton() == MouseEvent.BUTTON3) {
 			//Call for Chuck Norris.
 			model.spawnChuckNorris();
+			//Decrease health.
+			model.decreaseHealth();
 		}
 	}
 
