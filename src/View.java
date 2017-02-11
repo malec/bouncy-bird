@@ -118,18 +118,6 @@ class View extends JPanel {
 		this.repaint();
 	}
 
-	/*
-	 * private boolean checkCollision() { tempIterator = model.getIterator();
-	 * while (tempIterator.hasNext()) { Obstacle temp = tempIterator.next(); if
-	 * (temp.allowCollision() &&
-	 * this.model.bird.getBounds().intersects(temp.getBounds())) { // gets a
-	 * collision. temp.bypassCollision(); temp.bypassScore();
-	 * decreaseProgressBar(); return true; } else if (temp.allowScore() &&
-	 * this.model.bird.getBounds().intersects(temp.getPassSpace())) { // Update
-	 * the score this.model.incrementScore(); temp.bypassScore(); //
-	 * increaseProgressBar(); return false; } } return false; }
-	 */
-
 	public void resetDifficulty() {
 		Obstacle.resetDifficulty();
 	}
