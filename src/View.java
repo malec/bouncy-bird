@@ -14,12 +14,10 @@ class View extends JPanel {
 	private Iterator<Sprite> tempIterator;
 	private int frames = 0;
 	private JProgressBar lifeIndicator;
-	private int healthIncreaseValue = 1;
 	private int healthDecreaseValue = 25;
 	private int bottomBound = 400;
 	private int upperBound = 10;
 	private int collisionFrame;
-	private int scoreIncreaseInterval = 3;
 
 	View(Controller c, Model m) {
 		c.setView(this);
@@ -56,30 +54,14 @@ class View extends JPanel {
 		frames++;
 		g.setColor(new Color(128, 255, 255));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		// g.drawImage(this.model.bird.birdImage,
-		// model.bird.xPosition,model.bird.yPosition, null);
-		// g.drawImage(model.hand.getImage(),
-		// model.hand.getXPosition(),model.hand.yPosition,null);
-		// model.hand.getYPosition(), null);
-		// Iterate through and draw
 		tempIterator = model.getIterator();
 		while (tempIterator.hasNext()) {
 			Sprite temp = tempIterator.next();
 			temp.drawSprite(g);
 		}
 		checkScore();
-
-		// System.out.println("Birdx: " + model.bird.xPosition + " and y is " + model.bird.yPosition);
-		// Decrease the score, and push them off of the boundary
 		checkLowerBound();
 		checkUpperBound();
-
-		if (this.model.gameIsRunning()) {
-			// Increase the score "over time".
-			if (0 == frames % scoreIncreaseInterval) {
-				increaseProgressBar();
-			}
-		}
 		// wrap frame count
 		if (frames >= 1000000) {
 			frames = 0;
@@ -89,14 +71,12 @@ class View extends JPanel {
 	private void checkLowerBound() {
 		if (model.bird.yPosition > bottomBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
-				decreaseProgressBar();
-				// System.out.println("Caught");
+				model.decreaseHealth();
 				collisionFrame++;
 			} else {
 				collisionFrame++;
 				if (collisionFrame >= 20) {
-					decreaseProgressBar();
-					// System.out.println("Decreased on interval of 10");
+					model.decreaseHealth();
 					collisionFrame = 0;
 				}
 			}
@@ -106,13 +86,13 @@ class View extends JPanel {
 	private void checkUpperBound() {
 		if (model.bird.yPosition <= upperBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
-				decreaseProgressBar();
+				model.decreaseHealth();
 				// System.out.println("Caught");
 				collisionFrame++;
 			} else {
 				collisionFrame++;
 				if (collisionFrame >= 20) {
-					decreaseProgressBar();
+					model.decreaseHealth();
 					// System.out.println("Decreased on interval of 10");
 					collisionFrame = 0;
 				}
@@ -121,6 +101,7 @@ class View extends JPanel {
 	}
 
 	private void checkScore() {
+		lifeIndicator.setValue(model.getHealth());
 		if (lifeIndicator.getValue() <= 0) {
 			gameOver();
 		}
@@ -155,11 +136,5 @@ class View extends JPanel {
 
 	private void decreaseProgressBar() {
 		lifeIndicator.setValue(lifeIndicator.getValue() - healthDecreaseValue);
-	}
-
-	private void increaseProgressBar() {
-		if (lifeIndicator.getValue() < 100) {
-			lifeIndicator.setValue(lifeIndicator.getValue() + healthIncreaseValue);
-		}
-	}
+	}	
 }

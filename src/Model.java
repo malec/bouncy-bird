@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+import com.sun.xml.internal.fastinfoset.algorithm.HexadecimalEncodingAlgorithm;
+
 import java.io.IOException;
 
 //import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
@@ -21,6 +23,10 @@ class Model {
 	public boolean gameOver;
 	public Hand hand;
 	public LinkedList<Sprite> spriteList;
+	private static int health;
+	private static int healthDecrement = 20;
+	private int healthIncrease = 1;
+	double healthTick = 0;
 
 	Model() {
 		bird = new Bird(this);
@@ -35,16 +41,23 @@ class Model {
 		// spriteList.add(new Obstacle(false, 800, -70, random));
 		spriteList.add(bird);
 		spriteList.add(hand);
+		health = 100;
 	}
 
 	public void update() {
 		if (gameIsRunning()) {
-			bird.checkCollision();
+			if (bird.checkCollision()) {
+				scoreReset();
+				decreaseHealth();
+			} else {
+				incrementScore();
+			}
+			increaseProgressBar();
 			Iterator<Sprite> temp = spriteList.iterator();
 			frames++;
 			boolean removeFirst = false;
 			Sprite tempSprite;
-			if (frames % 50 == 0) {
+			if (frames % 30 == 0) {
 				// print out a new obstacle every 25 frames.
 				Obstacle newRandom = new Obstacle(random);
 				spriteList.add(newRandom);
@@ -62,6 +75,11 @@ class Model {
 		if (gameOver) {
 			hand.animate(bird.yPosition);
 		}
+	}
+
+	public void decreaseHealth() {
+		health -= healthDecrement;
+
 	}
 
 	public void onClick() {
@@ -146,5 +164,21 @@ class Model {
 
 	public Iterator<Sprite> getIterator() {
 		return spriteList.iterator();
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	private void increaseProgressBar() {
+		if (health < 100) {
+			healthTick += .5;
+			if (healthTick % 5 == 0) {
+				health += 2;
+			}
+			if (healthTick > 5) {
+				healthTick = 0;
+			}
+		}
 	}
 }

@@ -26,7 +26,7 @@ public class Obstacle extends Sprite {
 	private boolean bypassScore;
 	private static int birdWidth = 64;
 	private Random random;
-	private static int scrollSpeed = 9;
+	private static int scrollSpeed = 7;
 	private static int previousYPosition;
 	// public static LinkedList<Obstacle> obstacleCollection = new
 	// LinkedList<Obstacle>();
