@@ -21,6 +21,7 @@ public class Obstacle extends Sprite {
 	private static int previousYPosition;
 	public int yDestination;
 	private double yVelocity = 0;
+	private boolean isObstacle;
 	// public static LinkedList<Obstacle> obstacleCollection = new
 	// LinkedList<Obstacle>();
 	// public static Iterator<Obstacle> obstacleIterator;
@@ -34,6 +35,7 @@ public class Obstacle extends Sprite {
 		bypassScore = false;
 		previousYPosition = ypos;
 		yDestination = ypos;
+		isObstacle=true;
 	}
 
 	// Generate a random obstacle
@@ -141,7 +143,7 @@ public class Obstacle extends Sprite {
 	}
 
 	public Boolean isObstacle() {
-		return true;
+		return isObstacle;
 	}
 
 	public void drawSprite(Graphics g) {
@@ -151,5 +153,8 @@ public class Obstacle extends Sprite {
 	public static void increaseDifficulty() {
 		scrollSpeed++;
 		System.out.println("Increased difficulty");
+	}
+	public void nolongeranObstacle(){
+		isObstacle=false;
 	}
 }
