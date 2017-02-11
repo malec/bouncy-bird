@@ -42,7 +42,6 @@ class Model {
 	public void update() {
 		if (gameIsRunning()) {
 			frames++;
-			System.out.println("Frames: " + frames);
 			if (bird.checkCollision()) {
 				scoreReset();
 				decreaseHealth();
