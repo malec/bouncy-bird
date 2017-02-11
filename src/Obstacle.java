@@ -12,15 +12,12 @@ public class Obstacle extends Sprite {
 	public static Image tubeUP = null;
 	public static Image tubeDown = null;
 	private static double difficultyIncrease = 0;
-	private int farRightXPosition = 600;
-	private int maxYUpright = 450;
 	private int minYUpright = 150;
 	private int minYNotUpright = 100;
 	private int maxYNotUpright = 300;
 	private boolean bypassCollision;
 	private boolean bypassScore;
 	private static int birdWidth = 64;
-	private Random random;
 	private static int scrollSpeed = 7;
 	private static int previousYPosition;
 	// public static LinkedList<Obstacle> obstacleCollection = new
@@ -35,7 +32,6 @@ public class Obstacle extends Sprite {
 		setOrientation(pointUP);
 		bypassCollision = false;
 		bypassScore = false;
-		random = _random;
 		previousYPosition = ypos;
 	}
 

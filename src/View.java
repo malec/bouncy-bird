@@ -14,7 +14,6 @@ class View extends JPanel {
 	private Iterator<Sprite> tempIterator;
 	private int frames = 0;
 	private JProgressBar lifeIndicator;
-	private int healthDecreaseValue = 25;
 	private int bottomBound = 400;
 	private int upperBound = 10;
 	private int collisionFrame;
