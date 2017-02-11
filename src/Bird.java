@@ -29,7 +29,6 @@ public class Bird extends Sprite {
 				System.exit(1);
 			}
 			xPosition = 20;
-			// yPosition=80;
 		}
 		if (birdFlapImage == null) {
 			try {

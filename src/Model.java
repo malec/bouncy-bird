@@ -38,6 +38,7 @@ class Model {
 	}
 
 	public void update() {
+		frames++;
 		if (gameIsRunning()) {
 			if (bird.checkCollision()) {
 				scoreReset();
@@ -45,8 +46,6 @@ class Model {
 			}
 			increaseProgressBar();
 			Iterator<Sprite> temp = spriteList.iterator();
-			frames++;
-			boolean removeFirst = false;
 			Sprite tempSprite;
 			if (frames % 30 == 0) {
 				// print out a new obstacle every 25 frames.
@@ -56,9 +55,7 @@ class Model {
 				while (temp.hasNext()) {
 					tempSprite = temp.next();
 					if (tempSprite.update()) {
-						if (tempSprite.isObstacle()) {
-							removeFirst = true;
-						}
+						temp.remove();
 					}
 				}
 			}
