@@ -121,8 +121,4 @@ class View extends JPanel {
 	public void resetDifficulty() {
 		Obstacle.resetDifficulty();
 	}
-
-	private void decreaseProgressBar() {
-		lifeIndicator.setValue(lifeIndicator.getValue() - healthDecreaseValue);
-	}	
 }
