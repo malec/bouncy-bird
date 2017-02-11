@@ -172,4 +172,8 @@ class Model {
 			}
 		}
 	}
+
+	public void spawnChuckNorris() {
+		spriteList.add(new ChuckNorris());
+	}
 }

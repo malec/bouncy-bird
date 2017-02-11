@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 public abstract class Sprite {
-	public int xPosition;// Obstacle was 1100
+	public int xPosition;
 	public int yPosition;
 
 	abstract Image getImage();
