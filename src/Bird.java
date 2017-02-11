@@ -114,20 +114,27 @@ public class Bird extends Sprite {
 
 	public boolean checkCollision() {
 		Iterator<Sprite> temp = model.getIterator();
+		Obstacle tempObs = null;
 		while (temp.hasNext()) {
 			Sprite next = temp.next();
-			if (this.doesCollide(next)) {
-				if (next.isObstacle()) {
-					Obstacle tempObs = (Obstacle) next;
+			if (next.isObstacle()) {
+				tempObs = (Obstacle) next;
+				if (this.doesCollide(next)) {
+
 					if (tempObs.allowCollision()) {
 						System.out.println("Collision");
 						tempObs.bypassCollision();
 						return true;
 					}
+				} else if (tempObs != null) {
+					if (getBounds().intersects(tempObs.getPassSpace()) && tempObs.allowScore()) {
+						model.incrementScore();
+						tempObs.bypassScore();
+					}
 				}
 			}
 		}
-		return false;
+		return false; 
 	}
 
 	public void resetCollision() {

@@ -19,7 +19,6 @@ class Model {
 	public LinkedList<Sprite> spriteList;
 	private static int health;
 	private static int healthDecrement = 20;
-	private int healthIncrease = 1;
 	double healthTick = 0;
 
 	Model() {
@@ -43,8 +42,6 @@ class Model {
 			if (bird.checkCollision()) {
 				scoreReset();
 				decreaseHealth();
-			} else {
-				incrementScore();
 			}
 			increaseProgressBar();
 			Iterator<Sprite> temp = spriteList.iterator();
