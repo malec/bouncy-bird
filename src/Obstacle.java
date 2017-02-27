@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
-import java.util.Random;
 
 /**
  * Created by alec on 01/24/17.

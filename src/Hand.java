@@ -12,6 +12,8 @@ public class Hand extends Sprite {
 	private Bird bird;
 	private int handUpSpeed = 30;
 	private int handDownSpeed = 30;
+	private double handVelocity=0;
+	private static final double constantHandVelocity=.8;
 
 	Hand(Bird _bird) {
 		handOpen = true;
@@ -38,18 +40,22 @@ public class Hand extends Sprite {
 	}
 
 	public void animate(int birdYPosition) {
+		//Move hand up
 		if (yPosition >= birdYPosition && birdYPosition < killGameYPosition) {
-			yPosition -= handUpSpeed;
+			yPosition -= handUpSpeed+handVelocity;
+			handVelocity-=constantHandVelocity;
 		} else {
 			// Change the image of the hand.
 			handOpen = false;
+			handVelocity=0;
 			// Pull it down.
 			if (yPosition >= killGameYPosition) {
 				// Game Over
 				System.exit(0);
 			} else {
 				yPosition += handDownSpeed;
-				bird.yPosition += handDownSpeed;
+				bird.yPosition += handDownSpeed+handVelocity;
+				handVelocity +=constantHandVelocity;
 			}
 		}
 
