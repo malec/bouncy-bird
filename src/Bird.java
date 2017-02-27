@@ -19,6 +19,7 @@ public class Bird extends Sprite {
 	private int collisionFrame = 0;
 	private int bottomBound = 400;
 	private int upperBound = 10;
+	public int health;
 
 	Bird(Model m) {
 		// Lazy load the image.

@@ -9,7 +9,7 @@ import java.util.*;
 class Model {
 	public Bird bird;
 	public Random random;
-	private int randomSeed = 9238;
+	private final int randomSeed = 9238;
 	private static boolean gameRunning;
 	private int score = 0;
 	// public LinkedList<Obstacle> obstacleCollection;
@@ -17,8 +17,7 @@ class Model {
 	public boolean gameOver;
 	public Hand hand;
 	public LinkedList<Sprite> spriteList;
-	private static int health;
-	private static int healthDecrement = 15;
+	private final static int healthDecrement = 15;
 	double healthTick = 0;
 	private int spawnFrequency = 30;
 	private int difficultyIncreaseFrequency = 200;
@@ -36,7 +35,16 @@ class Model {
 		// spriteList.add(new Obstacle(false, 800, -70, random));
 		spriteList.add(bird);
 		spriteList.add(hand);
-		health = 100;
+		bird.health = 100;
+	}
+	
+	Model(Model m){
+		bird = m.bird;
+		random = m.random;
+		score = m.score;
+		frames = m.frames;
+		gameOver = m.gameOver;
+		hand = m.hand;
 	}
 
 	public void update() {
@@ -77,7 +85,7 @@ class Model {
 	}
 
 	public void decreaseHealth() {
-		health -= healthDecrement;
+		bird.health -= healthDecrement;
 
 	}
 
@@ -94,7 +102,7 @@ class Model {
 	}
 
 	public void gamePause() {
-		this.gameRunning = false;
+		gameRunning = false;
 		this.bird.dblVerticalVelcoity = 0;
 		final JOptionPane optionPane = new JOptionPane("Paused. Would you like to save?", JOptionPane.QUESTION_MESSAGE,
 				JOptionPane.YES_NO_OPTION);
@@ -166,14 +174,14 @@ class Model {
 	}
 
 	public int getHealth() {
-		return health;
+		return bird.health;
 	}
 
 	private void increaseProgressBar() {
-		if (health < 100) {
+		if (bird.health < 100) {
 			healthTick += .25;
 			if (healthTick % 2 == 0) {
-				health += 3;
+				bird.health += 3;
 			}
 			if (healthTick > 5) {
 				healthTick = 0;
