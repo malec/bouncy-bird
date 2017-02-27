@@ -11,7 +11,7 @@ class Model {
 	public Random random;
 	private final int randomSeed = 9238;
 	private static boolean gameRunning;
-	public int score = 0;
+	private int score = 0;
 	// public LinkedList<Obstacle> obstacleCollection;
 	private int frames;
 	public boolean gameOver;
@@ -45,7 +45,6 @@ class Model {
 		frames = m.frames;
 		gameOver = m.gameOver;
 		hand = m.hand;
-		spriteList = m.spriteList;
 	}
 
 	public void update() {
