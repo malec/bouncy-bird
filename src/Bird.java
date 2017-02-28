@@ -7,6 +7,7 @@ import java.util.Iterator;
  * Created by alec on 01/23/17.
  */
 public class Bird extends Sprite {
+	public enum actions{do_nothing,flap,call_chuck};
 	private static int wingflyDuration = 3;
 	private static double verticalVelocityIncrement = -16;
 	public double dblVerticalVelcoity;
