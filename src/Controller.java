@@ -14,6 +14,8 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 		double chuckCost = model.evaluateAction(Bird.actions.call_chuck, 0);
 		double nothingCost = model.evaluateAction(Bird.actions.do_nothing, 0);
 		double flapCost = model.evaluateAction(Bird.actions.flap, 0);
+		
+		//do the best one
 		if (chuckCost > flapCost && chuckCost > nothingCost) {
 			model.doAction(Bird.actions.call_chuck);
 		} else if (flapCost > nothingCost) {

@@ -200,7 +200,8 @@ class Model {
 			return 0;
 		}
 		if (depth >= d) {
-			return 500 - Math.abs(bird.yPosition - 250);
+			//return 500 - Math.abs(bird.yPosition - 250);
+			return bird.health;
 		}
 		Model copy = new Model(this);
 		copy.doAction(type);
@@ -208,7 +209,7 @@ class Model {
 
 		// Recursively Evaluate
 		if (depth % k != 0) {
-			return evaluateAction(Bird.actions.do_nothing, depth + 1);
+			return copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
 		} else {
 			double best = copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
 			best = Math.max(best, copy.evaluateAction(Bird.actions.flap, depth + 1));
