@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -37,15 +36,15 @@ class Model {
 		spriteList.add(hand);
 		bird.health = 100;
 	}
-	
-	Model(Model m){
+
+	Model(Model m) {
 		bird = m.bird;
 		random = m.random;
 		score = m.score;
 		frames = m.frames;
 		gameOver = m.gameOver;
 		hand = m.hand;
-		spriteList = m.spriteList;		
+		spriteList = m.spriteList;
 	}
 
 	public void update() {
@@ -86,7 +85,7 @@ class Model {
 	}
 
 	public void decreaseHealth() {
-		bird.health -= healthDecrement; //Bug here
+		bird.health -= healthDecrement; // Bug here
 
 	}
 
@@ -192,5 +191,33 @@ class Model {
 
 	public void spawnChuckNorris() {
 		spriteList.add(new ChuckNorris(this));
+	}
+	
+	public double evaluateAction(Bird.actions type, int depth){
+		if(bird.health<=0){
+			return 0;
+		}
+		if(depth>=d){
+			return 500-Math.abs(bird.yPosition-250);
+		}
+		Model copy = new Model(this);
+		copy.doAction(type);
+		copy.update();
+		
+		//Recursively Evaluate
+		if(depth%k!=0){
+			return evaluateAction(Bird.actions.do_nothing,depth+1);
+		}
+		else{
+			double best = copy.evaluateAction(Bird.actions.do_nothing, depth+1);
+			best = Math.max(best, copy.evaluateAction(Bird.actions.flap, depth+1));
+			best = Math.max(best, copy.evaluateAction(Bird.actions.call_chuck, depth+1));
+			return best;
+		}
+	}
+
+	private void doAction(Bird.actions type) {
+		// TODO Auto-generated method stub
+		
 	}
 }
