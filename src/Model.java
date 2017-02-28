@@ -18,9 +18,9 @@ class Model {
 	public Hand hand;
 	public LinkedList<Sprite> spriteList;
 	private final static int healthDecrement = 15;
-	double healthTick = 0;
+	private double healthTick = 0;
 	private int spawnFrequency = 30;
-	private int difficultyIncreaseFrequency = 200;
+	private final int difficultyIncreaseFrequency = 200;
 
 	Model() {
 		bird = new Bird(this);
@@ -41,11 +41,18 @@ class Model {
 	Model(Model m){
 		bird = m.bird;
 		random = m.random;
+		random.setSeed(13);
+		gameRunning=true;
 		score = m.score;
 		frames = m.frames;
 		gameOver = m.gameOver;
 		hand = m.hand;
 		spriteList = m.spriteList;
+		spriteList.add(m.bird);
+		spriteList.add(m.hand);
+		spriteList.add(new Obstacle(true, 500, 200, random));
+		bird.health=100;
+		
 	}
 
 	public void update() {
