@@ -9,6 +9,10 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 		model = m;
 		game = g;
 	}
+	
+	public void update(){
+		
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (model.gameIsRunning() && !model.gameOver) {

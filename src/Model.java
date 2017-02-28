@@ -193,7 +193,7 @@ class Model {
 		spriteList.add(new ChuckNorris(this));
 	}
 	
-	public double evaluateAction(Bird.actions type, int depth){
+	/*public double evaluateAction(Bird.actions type, int depth){
 		if(bird.health<=0){
 			return 0;
 		}
@@ -214,7 +214,7 @@ class Model {
 			best = Math.max(best, copy.evaluateAction(Bird.actions.call_chuck, depth+1));
 			return best;
 		}
-	}
+	}*/
 
 	private void doAction(Bird.actions type) {
 		// TODO Auto-generated method stub
