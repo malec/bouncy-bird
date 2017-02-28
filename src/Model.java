@@ -41,18 +41,11 @@ class Model {
 	Model(Model m){
 		bird = m.bird;
 		random = m.random;
-		random.setSeed(13);
-		gameRunning=true;
 		score = m.score;
 		frames = m.frames;
 		gameOver = m.gameOver;
 		hand = m.hand;
-		spriteList = m.spriteList;
-		spriteList.add(m.bird);
-		spriteList.add(m.hand);
-		spriteList.add(new Obstacle(true, 500, 200, random));
-		bird.health=100;
-		
+		spriteList = m.spriteList;		
 	}
 
 	public void update() {

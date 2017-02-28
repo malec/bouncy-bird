@@ -6,8 +6,9 @@ public class Game extends JFrame {
 
     public Game() {
     	model = new Model();
-        Controller controller = new Controller(model, this);
-        view = new View(controller, model);
+    	Model model2= new Model(model);
+        Controller controller = new Controller(model2, this);
+        view = new View(controller, model2);
         this.setTitle("Bouncy Bird V 4.0 - Alec Ahlbrandt");
         this.setSize(500, 500);
         this.getContentPane().add(view);
