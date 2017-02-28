@@ -3,12 +3,13 @@ import javax.swing.JFrame;
 public class Game extends JFrame {
     View view;
     Model model;
+    Controller controller;
 
     public Game() {
     	model = new Model();
     	Model model2= new Model(model);
     	model = model2;
-        Controller controller = new Controller(model2, this);
+        controller = new Controller(model2, this);
         view = new View(controller, model2);
         this.setTitle("Bouncy Bird V 4.0 - Alec Ahlbrandt");
         this.setSize(500, 500);
@@ -21,6 +22,7 @@ public class Game extends JFrame {
 
     public void run() {
         while (true) {
+        	controller.update();
             model.update();
             view.repaint(); // Indirectly calls View.paintComponent
             // Go to sleep for 50 miliseconds 

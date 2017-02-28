@@ -20,6 +20,8 @@ class Model {
 	private double healthTick = 0;
 	private int spawnFrequency = 30;
 	private final int difficultyIncreaseFrequency = 200;
+	private static final int d = 35;
+	private static final int k = 6;
 
 	Model() {
 		bird = new Bird(this);
@@ -192,32 +194,37 @@ class Model {
 	public void spawnChuckNorris() {
 		spriteList.add(new ChuckNorris(this));
 	}
-	
-	/*public double evaluateAction(Bird.actions type, int depth){
-		if(bird.health<=0){
+
+	public double evaluateAction(Bird.actions type, int depth) {
+		if (bird.health <= 0) {
 			return 0;
 		}
-		if(depth>=d){
-			return 500-Math.abs(bird.yPosition-250);
+		if (depth >= d) {
+			return 500 - Math.abs(bird.yPosition - 250);
 		}
 		Model copy = new Model(this);
 		copy.doAction(type);
 		copy.update();
-		
-		//Recursively Evaluate
-		if(depth%k!=0){
-			return evaluateAction(Bird.actions.do_nothing,depth+1);
-		}
-		else{
-			double best = copy.evaluateAction(Bird.actions.do_nothing, depth+1);
-			best = Math.max(best, copy.evaluateAction(Bird.actions.flap, depth+1));
-			best = Math.max(best, copy.evaluateAction(Bird.actions.call_chuck, depth+1));
+
+		// Recursively Evaluate
+		if (depth % k != 0) {
+			return evaluateAction(Bird.actions.do_nothing, depth + 1);
+		} else {
+			double best = copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
+			best = Math.max(best, copy.evaluateAction(Bird.actions.flap, depth + 1));
+			best = Math.max(best, copy.evaluateAction(Bird.actions.call_chuck, depth + 1));
 			return best;
 		}
-	}*/
+	}
 
-	private void doAction(Bird.actions type) {
-		// TODO Auto-generated method stub
-		
+	public void doAction(Bird.actions type) {
+		if(type==Bird.actions.call_chuck){
+			spawnChuckNorris();
+			System.out.println("Spawn chuck");
+		}
+		else if(type == Bird.actions.flap){
+			System.out.println("Flap");
+			bird.flap();
+		}
 	}
 }
