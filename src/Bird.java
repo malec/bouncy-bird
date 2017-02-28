@@ -10,15 +10,15 @@ public class Bird extends Sprite {
 	private static int wingflyDuration = 3;
 	private static double verticalVelocityIncrement = -16;
 	public double dblVerticalVelcoity;
-	private int frameCouter;
+	//private int frameCouter;
 	public static Image birdImage = null;
-	static public Image defaultbirdImage;
+	public static Image defaultbirdImage;
 	public static Image birdFlapImage = null;
 	private Model model;
-	private static Boolean allowCollision;
-	private int collisionFrame = 0;
-	private int bottomBound = 400;
-	private int upperBound = 10;
+	private Boolean allowCollision;
+	private static int collisionFrame = 0;
+	private static int bottomBound = 400;
+	private static int upperBound = 10;
 	public int health;
 
 	Bird(Model m) {
@@ -42,7 +42,7 @@ public class Bird extends Sprite {
 				System.exit(1);
 			}
 		}
-		frameCouter = 0;
+		//frameCouter = 0;
 		allowCollision = true;
 		model = m;
 	}
@@ -54,7 +54,7 @@ public class Bird extends Sprite {
 			if (yPosition < 400) {
 				dblVerticalVelcoity += wingflyDuration;
 				yPosition += dblVerticalVelcoity;
-				frameCouter++;
+				//frameCouter++;
 			} else {
 				// Game Fail.
 				dblVerticalVelcoity = 0;
