@@ -27,7 +27,7 @@ class Model {
 		random = new Random(randomSeed);
 		random.setSeed(13);
 		gameRunning = true;
-		score = 0;
+		score = 100;
 		gameOver = false;
 		hand = new Hand(bird);
 		spriteList = new LinkedList<Sprite>();
