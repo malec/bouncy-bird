@@ -52,11 +52,12 @@ public class ChuckNorris extends Sprite {
 				Sprite next = iterator.next();
 				if (next.isObstacle()) {
 					Obstacle temp = (Obstacle) next;
-					if (next.isObstacle() && this.doesCollide(next)) {
+					if (this.doesCollide(next)&&!temp.beenHit) {
 						//If it collides with an obstacle.
 						positiveX = false;
 						temp.yDestination = 0;
 						yVelocity=0;
+						temp.beenHit=true;
 					}
 				}
 			}
@@ -64,15 +65,18 @@ public class ChuckNorris extends Sprite {
 		if (xPosition > 500 || yPosition > 500) {
 			return true;
 		}
+		//move up and right
 		if (positiveX) {
 			xPosition += 5 + xRandom;
 			yPosition -= 30;
 		} else {
+			//if it hit
 			xPosition -= 5 + xRandom;
 			xPosition += xVelocity;
 			yPosition+=10;
 			yVelocity+=1;
 		}
+		//move down (arc affect)
 		yPosition += yVelocity;
 		yVelocity += 1;
 		return false;
