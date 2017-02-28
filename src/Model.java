@@ -27,7 +27,7 @@ class Model {
 		random = new Random(randomSeed);
 		random.setSeed(13);
 		gameRunning = true;
-		score = 100;
+		score = 0;
 		gameOver = false;
 		hand = new Hand(bird);
 		spriteList = new LinkedList<Sprite>();
@@ -86,7 +86,7 @@ class Model {
 	}
 
 	public void decreaseHealth() {
-		bird.health -= healthDecrement;
+		bird.health -= healthDecrement; //Bug here
 
 	}
 

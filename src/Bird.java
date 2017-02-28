@@ -33,6 +33,7 @@ public class Bird extends Sprite {
 				System.exit(1);
 			}
 			xPosition = 20;
+			yPosition = 20;
 		}
 		if (birdFlapImage == null) {
 			try {
