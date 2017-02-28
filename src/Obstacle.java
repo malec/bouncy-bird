@@ -20,6 +20,7 @@ public class Obstacle extends Sprite {
 	private static int previousYPosition;
 	public int yDestination;
 	private double yVelocity = 0;
+	public boolean beenHit;
 	// public static LinkedList<Obstacle> obstacleCollection = new
 	// LinkedList<Obstacle>();
 	// public static Iterator<Obstacle> obstacleIterator;
@@ -33,6 +34,7 @@ public class Obstacle extends Sprite {
 		bypassScore = false;
 		previousYPosition = ypos;
 		yDestination = ypos;
+		beenHit=false;
 	}
 
 	// Generate a random obstacle
