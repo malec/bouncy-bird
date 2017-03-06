@@ -31,6 +31,7 @@ public class ChuckNorris extends Sprite {
 			}
 		}
 		xRandom = randomAddition.nextInt(15);
+		model.decreaseHealth();
 	}
 	
 	public ChuckNorris(ChuckNorris that){
