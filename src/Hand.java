@@ -5,15 +5,15 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Hand extends Sprite {
-	private Image handOpenImage = null;
-	private Image handCloseImage = null;
-	public static int killGameYPosition = 550;
+	private static Image handOpenImage = null;
+	private static Image handCloseImage = null;
+	public static final int killGameYPosition = 550;
 	private boolean handOpen;
 	private Bird bird;
-	private int handUpSpeed = 30;
-	private int handDownSpeed = 30;
-	private double handVelocity=0;
-	private static final double constantHandVelocity=.8;
+	private static final int handUpSpeed = 30;
+	private static final int handDownSpeed = 30;
+	private double handVelocity = 0;
+	private static final double constantHandVelocity = .8;
 
 	Hand(Bird _bird) {
 		handOpen = true;
@@ -39,23 +39,29 @@ public class Hand extends Sprite {
 		yPosition = 500;
 	}
 
+	public Hand(Hand other) {
+		handOpen = other.handOpen;
+		bird = other.bird;
+		handVelocity = other.handVelocity;
+	}
+
 	public void animate(int birdYPosition) {
-		//Move hand up
+		// Move hand up
 		if (yPosition >= birdYPosition && birdYPosition < killGameYPosition) {
-			yPosition -= handUpSpeed+handVelocity;
-			handVelocity-=constantHandVelocity;
+			yPosition -= handUpSpeed + handVelocity;
+			handVelocity -= constantHandVelocity;
 		} else {
 			// Change the image of the hand.
 			handOpen = false;
-			handVelocity=0;
+			handVelocity = 0;
 			// Pull it down.
 			if (yPosition >= killGameYPosition) {
 				// Game Over
 				System.exit(0);
 			} else {
 				yPosition += handDownSpeed;
-				bird.yPosition += handDownSpeed+handVelocity;
-				handVelocity +=constantHandVelocity;
+				bird.yPosition += handDownSpeed + handVelocity;
+				handVelocity += constantHandVelocity;
 			}
 		}
 
@@ -95,6 +101,10 @@ public class Hand extends Sprite {
 	}
 
 	public void drawSprite(Graphics g) {
-		g.drawImage(getImage(),xPosition,yPosition,null);
+		g.drawImage(getImage(), xPosition, yPosition, null);
+	}
+
+	public Sprite clone(Sprite that) {
+		return new Hand((Hand) that);
 	}
 }
