@@ -39,12 +39,11 @@ class Model {
 	}
 	
 	Model(Model m){
-		bird = m.bird;
+		bird = new Bird(m.bird);
 		random = m.random;
 		score = m.score;
 		frames = m.frames;
 		gameOver = m.gameOver;
-		hand = m.hand;
 		spriteList = m.spriteList;		
 	}
 
