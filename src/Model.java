@@ -37,14 +37,19 @@ class Model {
 		spriteList.add(hand);
 		bird.health = 100;
 	}
-	
-	Model(Model m){
+
+	Model(Model m) {
 		bird = new Bird(m.bird);
 		random = m.random;
 		score = m.score;
 		frames = m.frames;
 		gameOver = m.gameOver;
-		spriteList = m.spriteList;		
+		spriteList = new LinkedList<Sprite>();
+		Iterator<Sprite> it = m.getIterator();
+		while (it.hasNext()) {
+			Sprite next = it.next();
+			spriteList.add(next.cloneSprite());
+		}
 	}
 
 	public void update() {
@@ -85,7 +90,7 @@ class Model {
 	}
 
 	public void decreaseHealth() {
-		bird.health -= healthDecrement; //Bug here
+		bird.health -= healthDecrement; // Bug here
 
 	}
 

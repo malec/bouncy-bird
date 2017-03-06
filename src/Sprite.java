@@ -5,6 +5,14 @@ public abstract class Sprite {
 	public int xPosition;
 	public int yPosition;
 
+	Sprite(){
+	}
+	
+	Sprite(Sprite that){
+		xPosition=that.xPosition;
+		yPosition=that.yPosition;
+	}
+	
 	abstract Image getImage();
 
 	abstract Boolean isObstacle();

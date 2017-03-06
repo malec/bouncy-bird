@@ -34,7 +34,7 @@ public class Obstacle extends Sprite {
 		bypassScore = false;
 		previousYPosition = ypos;
 		yDestination = ypos;
-		beenHit=false;
+		beenHit = false;
 	}
 
 	// Generate a random obstacle
@@ -51,16 +51,15 @@ public class Obstacle extends Sprite {
 		setOrientation(pointUP);
 		yDestination = yPosition;
 	}
-	
-	public Obstacle(Obstacle other){
-		pointUP=other.pointUP;
-		bypassCollision=other.bypassCollision;
-		bypassScore=other.bypassScore;
-		yDestination=other.yDestination;
-		yVelocity=other.yVelocity;
-		beenHit=other.beenHit;
-		xPosition=other.xPosition;
-		yPosition=other.yPosition;
+
+	public Obstacle(Obstacle other) {
+		super(other);
+		pointUP = other.pointUP;
+		bypassCollision = other.bypassCollision;
+		bypassScore = other.bypassScore;
+		yDestination = other.yDestination;
+		yVelocity = other.yVelocity;
+		beenHit = other.beenHit;
 	}
 
 	// Return true if you should remove from the collection.
@@ -71,12 +70,12 @@ public class Obstacle extends Sprite {
 				// Remove from the list so return true
 				return true;
 			} else {
-				if (yDestination == 0 ) {
-					//The tubes moving, so don't allow collisions.
-					bypassCollision=true;
-						yPosition += 10;
-						yPosition += yVelocity;
-						yVelocity += 1;
+				if (yDestination == 0) {
+					// The tubes moving, so don't allow collisions.
+					bypassCollision = true;
+					yPosition += 10;
+					yPosition += yVelocity;
+					yVelocity += 1;
 				}
 			}
 			xPosition -= scrollSpeed; // Put this somewhere
@@ -164,7 +163,8 @@ public class Obstacle extends Sprite {
 		scrollSpeed++;
 		System.out.println("Increased difficulty");
 	}
-	public Sprite cloneSprite(){
+
+	public Sprite cloneSprite() {
 		return new Obstacle(this);
 	}
 }

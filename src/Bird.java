@@ -50,9 +50,9 @@ public class Bird extends Sprite {
 	}
 
 	public Bird(Bird bird) {
+		super(bird);
 		dblVerticalVelcoity=bird.dblVerticalVelcoity;
 		allowCollision=bird.allowCollision;
-		model=bird.model;
 		health=bird.health;
 	}
 
@@ -189,7 +189,7 @@ public class Bird extends Sprite {
 			}
 		}
 	}
-	public Sprite clone(Sprite that){
-		return new Bird((Bird)that);
+	public Sprite cloneSprite(){
+		return new Bird(this);
 	}
 }
