@@ -20,7 +20,7 @@ class Model {
 	private double healthTick = 0;
 	private int spawnFrequency = 30;
 	private final int difficultyIncreaseFrequency = 200;
-	private static final int d = 35;
+	private static final int d = 20;
 	private static final int k = 6;
 
 	Model() {
@@ -41,10 +41,12 @@ class Model {
 
 	Model(Model m) {
 		bird = new Bird(m.bird);
+		bird.setModel(this);
 		random = m.random;
 		score = m.score;
 		frames = m.frames;
 		gameOver = m.gameOver;
+		gameRunning=m.gameRunning;
 		spriteList = new LinkedList<Sprite>();
 		Iterator<Sprite> it = m.getIterator();
 		while (it.hasNext()) {
@@ -103,7 +105,7 @@ class Model {
 		bird.release();
 	}
 
-	public static boolean gameIsRunning() {
+	public boolean gameIsRunning() {
 		return gameRunning;
 	}
 
@@ -204,7 +206,7 @@ class Model {
 			return 0;
 		}
 		if (depth >= d) {
-			//return 500 - Math.abs(bird.yPosition - 250);
+			// return 500 - Math.abs(bird.yPosition - 250);
 			return bird.health;
 		}
 		Model copy = new Model(this);
@@ -223,13 +225,15 @@ class Model {
 	}
 
 	public void doAction(Bird.actions type) {
-		if(type==Bird.actions.call_chuck){
+		if (type == Bird.actions.call_chuck) {
 			spawnChuckNorris();
-			System.out.println("Spawn chuck");
-		}
-		else if(type == Bird.actions.flap){
-			System.out.println("Flap");
+			// System.out.println("Simulated Spawn chuck");
+		} else if (type == Bird.actions.flap) {
+			// System.out.println("Simulated Flap");
 			bird.flap();
+		}
+		else{
+			bird.update();
 		}
 	}
 }

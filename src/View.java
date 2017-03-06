@@ -38,7 +38,7 @@ class View extends JPanel {
 
 		// To read the image in.
 		try {
-			this.model.bird.birdImage = ImageIO.read(new File("bird.png"));
+			Bird.birdImage = ImageIO.read(new File("bird.png"));
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 			System.exit(1);

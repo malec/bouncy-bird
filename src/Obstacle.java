@@ -64,19 +64,17 @@ public class Obstacle extends Sprite {
 
 	// Return true if you should remove from the collection.
 	public boolean update() {
-		if (Model.gameIsRunning()) {
-			// If the tube is off the screen, the redraw it.
-			if (xPosition < -100) {
-				// Remove from the list so return true
-				return true;
-			} else {
-				if (yDestination == 0) {
-					// The tubes moving, so don't allow collisions.
-					bypassCollision = true;
-					yPosition += 10;
-					yPosition += yVelocity;
-					yVelocity += 1;
-				}
+		// If the tube is off the screen, the redraw it.
+		if (xPosition < -100) {
+			// Remove from the list so return true
+			return true;
+		} else {
+			if (yDestination == 0) {
+				// The tubes moving, so don't allow collisions.
+				bypassCollision = true;
+				yPosition += 10;
+				yPosition += yVelocity;
+				yVelocity += 1;
 			}
 			xPosition -= scrollSpeed; // Put this somewhere
 		} // else

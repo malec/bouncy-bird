@@ -57,7 +57,7 @@ public class Bird extends Sprite {
 	}
 
 	public boolean update() {
-		if (Model.gameIsRunning()) {
+		if (model.gameIsRunning()) {
 			checkBounds();
 			// Move the bird
 			if (yPosition < 400) {
@@ -190,6 +190,11 @@ public class Bird extends Sprite {
 		}
 	}
 	public Sprite cloneSprite(){
-		return new Bird(this);
+		Bird b = new Bird(this);
+		b.setModel(model);
+		return b;
+	}
+	public void setModel(Model m){
+		model = m;
 	}
 }

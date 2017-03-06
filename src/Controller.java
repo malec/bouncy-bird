@@ -11,17 +11,20 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 	}
 
 	public void update() {
-		double chuckCost = model.evaluateAction(Bird.actions.call_chuck, 0);
 		double nothingCost = model.evaluateAction(Bird.actions.do_nothing, 0);
 		double flapCost = model.evaluateAction(Bird.actions.flap, 0);
+		double chuckCost = model.evaluateAction(Bird.actions.call_chuck, 0);
 		
 		//do the best one
-		if (chuckCost > flapCost && chuckCost > nothingCost) {
+		if ((chuckCost > flapCost) && (chuckCost > nothingCost)) {
 			model.doAction(Bird.actions.call_chuck);
+			System.out.println("Call chuck");
 		} else if (flapCost > nothingCost) {
 			model.doAction(Bird.actions.flap);
+			System.out.println("Flap");
 		} else {
 			model.doAction(Bird.actions.do_nothing);
+			System.out.println("Do nothing");
 			if(nothingCost==0){
 				System.out.println("There is no way to survive. :-(");
 			}
@@ -59,8 +62,6 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 		if (e.getButton() == MouseEvent.BUTTON3) {
 			// Call for Chuck Norris.
 			model.spawnChuckNorris();
-			// Decrease health.
-			model.decreaseHealth();
 		}
 	}
 
