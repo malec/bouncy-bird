@@ -10,9 +10,9 @@ public class Obstacle extends Sprite {
 	public static Image spriteImage;
 	public static Image tubeUP = null;
 	public static Image tubeDown = null;
-	private int minYUpright = 150;
-	private int minYNotUpright = 100;
-	private int maxYNotUpright = 300;
+	private static int minYUpright = 150;
+	private static int minYNotUpright = 100;
+	private static int maxYNotUpright = 300;
 	private boolean bypassCollision;
 	private boolean bypassScore;
 	private static int birdWidth = 64;
@@ -50,6 +50,15 @@ public class Obstacle extends Sprite {
 		xPosition = 500;
 		setOrientation(pointUP);
 		yDestination = yPosition;
+	}
+	
+	public Obstacle(Obstacle other){
+		pointUP=other.pointUP;
+		bypassCollision=other.bypassCollision;
+		bypassScore=other.bypassScore;
+		yDestination=other.yDestination;
+		yVelocity=other.yVelocity;
+		beenHit=other.beenHit;
 	}
 
 	// Return true if you should remove from the collection.
@@ -152,5 +161,8 @@ public class Obstacle extends Sprite {
 	public static void increaseDifficulty() {
 		scrollSpeed++;
 		System.out.println("Increased difficulty");
+	}
+	public Sprite clone(Sprite that){
+		return new Obstacle((Obstacle)that);
 	}
 }

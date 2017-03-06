@@ -13,6 +13,8 @@ public abstract class Sprite {
 
 	abstract boolean update();
 
+	abstract Sprite clone(Sprite that);
+
 	public boolean doesCollide(Sprite that) {
 		if (that.isObstacle()) {
 			if (this.xPosition < that.xPosition + that.getImage().getWidth(null)

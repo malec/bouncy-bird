@@ -32,6 +32,17 @@ public class ChuckNorris extends Sprite {
 		}
 		xRandom = randomAddition.nextInt(15);
 	}
+	
+	public ChuckNorris(ChuckNorris that){
+		positiveX=that.positiveX;
+		xVelocity=that.xVelocity;
+		model=that.model;
+		xPosition=that.xPosition;
+		yPosition=that.yPosition;
+		randomAddition=that.randomAddition;
+		xRandom=that.xRandom;
+		chuckNorrisImage=that.chuckNorrisImage;
+	}
 
 	public Image getImage() {
 		return chuckNorrisImage;
@@ -80,6 +91,10 @@ public class ChuckNorris extends Sprite {
 		yPosition += yVelocity;
 		yVelocity += 1;
 		return false;
+	}
+	
+	Sprite clone(Sprite that){
+		return new ChuckNorris((ChuckNorris)that);
 	}
 
 }
