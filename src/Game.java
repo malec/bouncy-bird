@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 public class Game extends JFrame {
     View view;
     Model model;
+    Controller controller;
 
     public Game() {
     	model = new Model();
@@ -19,7 +20,9 @@ public class Game extends JFrame {
 
     public void run() {
         while (true) {
-            model.update();
+        	System.out.println("Update");
+        	controller.update();
+        	model.update();
             view.repaint(); // Indirectly calls View.paintComponent
             // Go to sleep for 50 miliseconds 
             try {
