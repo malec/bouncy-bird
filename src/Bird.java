@@ -7,11 +7,14 @@ import java.util.Iterator;
  * Created by alec on 01/23/17.
  */
 public class Bird extends Sprite {
-	public static enum actions{do_nothing,flap,call_chuck};
+	public static enum actions {
+		do_nothing, flap, call_chuck
+	};
+
 	private static int wingflyDuration = 3;
 	private static double verticalVelocityIncrement = -16;
 	public double dblVerticalVelcoity;
-	//private int frameCouter;
+	// private int frameCouter;
 	public static Image birdImage = null;
 	public static Image defaultbirdImage;
 	public static Image birdFlapImage = null;
@@ -44,29 +47,32 @@ public class Bird extends Sprite {
 				System.exit(1);
 			}
 		}
-		//frameCouter = 0;
+		// frameCouter = 0;
 		allowCollision = true;
 		model = m;
 	}
 
 	public Bird(Bird bird) {
 		super(bird);
-		dblVerticalVelcoity=bird.dblVerticalVelcoity;
-		allowCollision=bird.allowCollision;
-		health=bird.health;
+		dblVerticalVelcoity = bird.dblVerticalVelcoity;
+		allowCollision = bird.allowCollision;
+		health = bird.health;
 	}
 
 	public boolean update() {
 		if (model.gameIsRunning()) {
 			checkBounds();
 			// Move the bird
-			if (yPosition < 400) {
+			if (yPosition < 400&&yPosition>10) {
 				dblVerticalVelcoity += wingflyDuration;
 				yPosition += dblVerticalVelcoity;
-				//frameCouter++;
+				// frameCouter++;
 			} else {
 				// Game Fail.
-				dblVerticalVelcoity = 0;
+				model.decreaseHealth();
+				if (yPosition >= 400) {
+					dblVerticalVelcoity = 0;
+				}
 			}
 		}
 		/*
@@ -152,12 +158,13 @@ public class Bird extends Sprite {
 				}
 			}
 		}
-		return false; 
+		return false;
 	}
 
 	public void resetCollision() {
 		allowCollision = true;
 	}
+
 	private void checkLowerBound() {
 		if (model.bird.yPosition > bottomBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
@@ -189,12 +196,14 @@ public class Bird extends Sprite {
 			}
 		}
 	}
-	public Sprite cloneSprite(){
+
+	public Sprite cloneSprite() {
 		Bird b = new Bird(this);
 		b.setModel(model);
 		return b;
 	}
-	public void setModel(Model m){
+
+	public void setModel(Model m) {
 		model = m;
 	}
 }

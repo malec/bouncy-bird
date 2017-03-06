@@ -215,6 +215,8 @@ class Model {
 
 		// Recursively Evaluate
 		if (depth % k != 0) {
+			System.out.println("Bird y now: "+copy.bird.yPosition);
+			System.out.println("Health:"+ copy.bird.health);
 			return copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
 		} else {
 			double best = copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
