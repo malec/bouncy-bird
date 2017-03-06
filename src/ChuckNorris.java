@@ -93,8 +93,8 @@ public class ChuckNorris extends Sprite {
 		return false;
 	}
 	
-	Sprite clone(Sprite that){
-		return new ChuckNorris((ChuckNorris)that);
+	public Sprite cloneSprite(){
+		return new ChuckNorris(this);
 	}
 
 }

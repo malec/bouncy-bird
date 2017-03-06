@@ -59,6 +59,8 @@ public class Obstacle extends Sprite {
 		yDestination=other.yDestination;
 		yVelocity=other.yVelocity;
 		beenHit=other.beenHit;
+		xPosition=other.xPosition;
+		yPosition=other.yPosition;
 	}
 
 	// Return true if you should remove from the collection.
@@ -162,7 +164,7 @@ public class Obstacle extends Sprite {
 		scrollSpeed++;
 		System.out.println("Increased difficulty");
 	}
-	public Sprite clone(Sprite that){
-		return new Obstacle((Obstacle)that);
+	public Sprite cloneSprite(){
+		return new Obstacle(this);
 	}
 }

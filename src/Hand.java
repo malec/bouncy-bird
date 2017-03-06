@@ -43,6 +43,8 @@ public class Hand extends Sprite {
 		handOpen = other.handOpen;
 		bird = other.bird;
 		handVelocity = other.handVelocity;
+		xPosition = other.bird.xPosition;
+		yPosition = other.yPosition;
 	}
 
 	public void animate(int birdYPosition) {
@@ -104,7 +106,7 @@ public class Hand extends Sprite {
 		g.drawImage(getImage(), xPosition, yPosition, null);
 	}
 
-	public Sprite clone(Sprite that) {
-		return new Hand((Hand) that);
+	public Sprite cloneSprite() {
+		return new Hand(this);
 	}
 }

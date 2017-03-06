@@ -13,7 +13,7 @@ public abstract class Sprite {
 
 	abstract boolean update();
 
-	abstract Sprite clone(Sprite that);
+	abstract Sprite cloneSprite();
 
 	public boolean doesCollide(Sprite that) {
 		if (that.isObstacle()) {
