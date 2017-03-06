@@ -49,6 +49,13 @@ public class Bird extends Sprite {
 		model = m;
 	}
 
+	public Bird(Bird bird) {
+		dblVerticalVelcoity=bird.dblVerticalVelcoity;
+		allowCollision=bird.allowCollision;
+		model=bird.model;
+		health=bird.health;
+	}
+
 	public boolean update() {
 		if (Model.gameIsRunning()) {
 			checkBounds();
@@ -181,5 +188,8 @@ public class Bird extends Sprite {
 				}
 			}
 		}
+	}
+	public Sprite clone(Sprite that){
+		return new Bird((Bird)that);
 	}
 }
