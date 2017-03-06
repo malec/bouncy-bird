@@ -34,11 +34,10 @@ public class ChuckNorris extends Sprite {
 	}
 	
 	public ChuckNorris(ChuckNorris that){
+		super(that);
 		positiveX=that.positiveX;
 		xVelocity=that.xVelocity;
 		model=that.model;
-		xPosition=that.xPosition;
-		yPosition=that.yPosition;
 		randomAddition=that.randomAddition;
 		xRandom=that.xRandom;
 		chuckNorrisImage=that.chuckNorrisImage;

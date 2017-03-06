@@ -40,11 +40,10 @@ public class Hand extends Sprite {
 	}
 
 	public Hand(Hand other) {
+		super(other);
 		handOpen = other.handOpen;
 		bird = other.bird;
 		handVelocity = other.handVelocity;
-		xPosition = other.bird.xPosition;
-		yPosition = other.yPosition;
 	}
 
 	public void animate(int birdYPosition) {
