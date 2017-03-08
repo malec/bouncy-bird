@@ -41,13 +41,13 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (model.gameIsRunning() && e.getButton() == MouseEvent.BUTTON1) {
+		if (Model.gameIsRunning() && e.getButton() == MouseEvent.BUTTON1) {
 			model.onClick();
 		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (model.gameIsRunning() && e.getButton() == MouseEvent.BUTTON1) {
+		if (Model.gameIsRunning() && e.getButton() == MouseEvent.BUTTON1) {
 			model.onRelease();
 		}
 	}
