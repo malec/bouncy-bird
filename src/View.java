@@ -35,14 +35,6 @@ class View extends JPanel {
 		panel.setBorder(BorderFactory.createEmptyBorder(380, 250, 10, 250));
 		panel.add(lifeIndicator);
 		this.add(panel);
-
-		// To read the image in.
-		try {
-			Bird.birdImage = ImageIO.read(new File("bird.png"));
-		} catch (Exception e) {
-			e.printStackTrace(System.err);
-			System.exit(1);
-		}
 	}
 
 	public void paintComponent(Graphics g) {
