@@ -15,7 +15,7 @@ public class Bird extends Sprite {
 	private static double verticalVelocityIncrement = -16;
 	public double dblVerticalVelcoity;
 	// private int frameCouter;
-	public static Image birdImage = null;
+	public Image birdImage = null;
 	public static Image defaultbirdImage;
 	public static Image birdFlapImage = null;
 	private Model model;
@@ -27,15 +27,15 @@ public class Bird extends Sprite {
 
 	Bird(Model m) {
 		// Lazy load the image.
-		if (birdImage == null) {
+		if (defaultbirdImage == null) {
 			// Load the image.
 			try {
 				defaultbirdImage = ImageIO.read(new File("bird.png"));
-				birdImage = defaultbirdImage;
 			} catch (Exception error) {
 				error.printStackTrace(System.err);
 				System.exit(1);
 			}
+			birdImage = defaultbirdImage;
 			xPosition = 20;
 			yPosition = 20;
 		}
@@ -63,7 +63,7 @@ public class Bird extends Sprite {
 		if (model.gameIsRunning()) {
 			checkBounds();
 			// Move the bird
-			if (yPosition < 400&&yPosition>10) {
+			if (yPosition < 400 && yPosition > 10) {
 				dblVerticalVelcoity += wingflyDuration;
 				yPosition += dblVerticalVelcoity;
 				// frameCouter++;
@@ -198,9 +198,13 @@ public class Bird extends Sprite {
 	}
 
 	public Sprite cloneSprite() {
-		Bird b = new Bird(this);
-		b.setModel(model);
-		return b;
+		if (model == null) {
+			throw new RuntimeException("Model is null");
+		} else {
+			Bird b = new Bird(model);
+			b.setModel(model);
+			return b;
+		}
 	}
 
 	public void setModel(Model m) {
