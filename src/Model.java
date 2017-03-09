@@ -1,3 +1,4 @@
+import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -16,11 +17,11 @@ class Model {
 	public boolean gameOver;
 	public Hand hand;
 	public LinkedList<Sprite> spriteList;
-	private final static int healthDecrement = 15;
+	public final static int healthDecrement = 20;
 	private double healthTick = 0;
-	private int spawnFrequency = 30;
+	private int spawnFrequency = 20;
 	private final int difficultyIncreaseFrequency = 200;
-	private static final int d = 20;
+	private static final int d = 25;
 	private static final int k = 6;
 
 	Model() {
@@ -33,35 +34,41 @@ class Model {
 		hand = new Hand(bird);
 		spriteList = new LinkedList<Sprite>();
 		spriteList.add(new Obstacle(true, 500, 200, random));// max
-		// spriteList.add(new Obstacle(false, 800, -70, random));
+		spriteList.add(
+				new Obstacle(true, 30 + bird.birdImage.getWidth(null), 10 + bird.birdImage.getHeight(null), random)); // Test
+																														// Tube
 		spriteList.add(bird);
 		spriteList.add(hand);
 		bird.health = 100;
 	}
 
 	Model(Model m) {
-		bird = new Bird(m.bird);
-		bird.setModel(this);
+		hand = (Hand) m.hand.cloneSprite();
 		random = m.random;
 		score = m.score;
 		frames = m.frames;
 		gameOver = m.gameOver;
-		gameRunning=m.gameRunning;
 		spriteList = new LinkedList<Sprite>();
-		Iterator<Sprite> it = m.getIterator();
+		Iterator<Sprite> it = m.spriteList.iterator();
 		while (it.hasNext()) {
 			Sprite next = it.next();
-			spriteList.add(next.cloneSprite());
+			if (next.isBird()) {
+				bird = (Bird) next.cloneSprite();
+				spriteList.add(bird);
+			} else {
+				spriteList.add(next.cloneSprite());
+			}
 		}
+		if(bird==null){
+			// you could throw new RuntimeException("Bird is null, and probably isn't in the list");
+			bird=(Bird)m.bird.cloneSprite();
+		}
+		bird.setModel(this);		
 	}
 
 	public void update() {
 		if (gameIsRunning()) {
 			frames++;
-			if (bird.checkCollision()) {
-				scoreReset();
-				decreaseHealth();
-			}
 			increaseProgressBar();
 			Iterator<Sprite> temp = spriteList.iterator();
 			Sprite tempSprite;
@@ -76,6 +83,10 @@ class Model {
 						temp.remove();
 					}
 				}
+			}
+			if (bird.checkCollision()) {
+				scoreReset();
+				decreaseHealth(healthDecrement);
 			}
 		}
 		if (gameOver) {
@@ -92,8 +103,8 @@ class Model {
 		}
 	}
 
-	public void decreaseHealth() {
-		bird.health -= healthDecrement; // Bug here
+	public void decreaseHealth(int i) {
+		bird.health -= i;
 
 	}
 
@@ -105,7 +116,7 @@ class Model {
 		bird.release();
 	}
 
-	public boolean gameIsRunning() {
+	public static boolean gameIsRunning() {
 		return gameRunning;
 	}
 
@@ -215,8 +226,8 @@ class Model {
 
 		// Recursively Evaluate
 		if (depth % k != 0) {
-			System.out.println("Bird y now: "+copy.bird.yPosition);
-			System.out.println("Health:"+ copy.bird.health);
+			System.out.println("Bird y now: " + copy.bird.yPosition);
+			System.out.println("Health:" + copy.bird.health);
 			return copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
 		} else {
 			double best = copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
@@ -233,9 +244,7 @@ class Model {
 		} else if (type == Bird.actions.flap) {
 			// System.out.println("Simulated Flap");
 			bird.flap();
-		}
-		else{
-			bird.update();
+		} else {
 		}
 	}
 }

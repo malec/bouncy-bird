@@ -165,4 +165,8 @@ public class Obstacle extends Sprite {
 	public Sprite cloneSprite() {
 		return new Obstacle(this);
 	}
+
+	public Boolean isBird() {
+		return false;
+	}
 }

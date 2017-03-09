@@ -33,9 +33,9 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (model.gameIsRunning() && !model.gameOver) {
+		if (Model.gameIsRunning() && !model.gameOver) {
 			model.gamePause();
-		} else if (!model.gameIsRunning() && model.gameOver == false) {
+		} else if (!Model.gameIsRunning() && model.gameOver == false) {
 			model.gameResume();
 		}
 	}

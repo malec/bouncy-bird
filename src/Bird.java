@@ -35,9 +35,6 @@ public class Bird extends Sprite {
 				error.printStackTrace(System.err);
 				System.exit(1);
 			}
-			birdImage = defaultbirdImage;
-			xPosition = 20;
-			yPosition = 20;
 		}
 		if (birdFlapImage == null) {
 			try {
@@ -50,6 +47,9 @@ public class Bird extends Sprite {
 		// frameCouter = 0;
 		allowCollision = true;
 		model = m;
+		xPosition = 20;
+		yPosition = 20;
+		birdImage = defaultbirdImage;
 	}
 
 	public Bird(Bird bird) {
@@ -57,10 +57,11 @@ public class Bird extends Sprite {
 		dblVerticalVelcoity = bird.dblVerticalVelcoity;
 		allowCollision = bird.allowCollision;
 		health = bird.health;
+		birdImage = bird.birdImage;
 	}
 
 	public boolean update() {
-		if (model.gameIsRunning()) {
+		if (Model.gameIsRunning()) {
 			checkBounds();
 			// Move the bird
 			if (yPosition < 400 && yPosition > 10) {
@@ -69,7 +70,7 @@ public class Bird extends Sprite {
 				// frameCouter++;
 			} else {
 				// Game Fail.
-				model.decreaseHealth();
+				model.decreaseHealth(Model.healthDecrement);
 				if (yPosition >= 400) {
 					dblVerticalVelcoity = 0;
 				}
@@ -95,12 +96,7 @@ public class Bird extends Sprite {
 
 		dblVerticalVelcoity += verticalVelocityIncrement;
 		yPosition += dblVerticalVelcoity;
-		try {
-			birdImage = birdFlapImage;
-		} catch (Exception error) {
-			error.printStackTrace();
-			System.exit(1);
-		}
+		birdImage = birdFlapImage;
 	}
 
 	public void release() {
@@ -168,12 +164,12 @@ public class Bird extends Sprite {
 	private void checkLowerBound() {
 		if (model.bird.yPosition > bottomBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
-				model.decreaseHealth();
+				model.decreaseHealth(Model.healthDecrement);
 				collisionFrame++;
 			} else {
 				collisionFrame++;
 				if (collisionFrame >= 20) {
-					model.decreaseHealth();
+					model.decreaseHealth(Model.healthDecrement);
 					collisionFrame = 0;
 				}
 			}
@@ -183,13 +179,13 @@ public class Bird extends Sprite {
 	private void checkUpperBound() {
 		if (model.bird.yPosition <= upperBound && model.gameOver == false) {
 			if (collisionFrame == 0) {
-				model.decreaseHealth();
+				model.decreaseHealth(Model.healthDecrement);
 				// System.out.println("Caught");
 				collisionFrame++;
 			} else {
 				collisionFrame++;
 				if (collisionFrame >= 20) {
-					model.decreaseHealth();
+					model.decreaseHealth(Model.healthDecrement);
 					// System.out.println("Decreased on interval of 10");
 					collisionFrame = 0;
 				}
@@ -201,7 +197,7 @@ public class Bird extends Sprite {
 		if (model == null) {
 			throw new RuntimeException("Model is null");
 		} else {
-			Bird b = new Bird(model);
+			Bird b = new Bird(this);
 			b.setModel(model);
 			return b;
 		}
@@ -209,5 +205,8 @@ public class Bird extends Sprite {
 
 	public void setModel(Model m) {
 		model = m;
+	}
+	public Boolean isBird(){
+		return true;
 	}
 }

@@ -16,6 +16,8 @@ public abstract class Sprite {
 	abstract Image getImage();
 
 	abstract Boolean isObstacle();
+	
+	abstract Boolean isBird();
 
 	abstract void drawSprite(Graphics g);
 

@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 public class Game extends JFrame {
     View view;
     Model model;
+    Model model1;
     Controller controller;
 
     public Game() {
@@ -15,18 +16,17 @@ public class Game extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
-        this.setFocusTraversalKeysEnabled(false);
+         this.setFocusTraversalKeysEnabled(false);
     }
 
     public void run() {
         while (true) {
-        	System.out.println("Update");
-        	//controller.update();
+        	controller.update();
         	model.update();
             view.repaint(); // Indirectly calls View.paintComponent
             // Go to sleep for 50 miliseconds 
             try {
-                Thread.sleep(50);
+                Thread.sleep(40);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.exit(1);

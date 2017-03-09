@@ -14,6 +14,8 @@ public class ChuckNorris extends Sprite {
 	private Model model;
 	private boolean positiveX;
 	private double xVelocity;
+	private static int callCost=10;
+	private boolean decreaseHealth;
 
 	public ChuckNorris(Model m) {
 		positiveX = true;
@@ -22,6 +24,7 @@ public class ChuckNorris extends Sprite {
 		xPosition = -10;
 		yPosition = 500;
 		randomAddition = new Random();
+		decreaseHealth=true;
 		if (chuckNorrisImage == null) {// Lazy load
 			try {
 				chuckNorrisImage = ImageIO.read(new File("chuck_norris.png"));
@@ -31,17 +34,17 @@ public class ChuckNorris extends Sprite {
 			}
 		}
 		xRandom = randomAddition.nextInt(15);
-		model.decreaseHealth();
 	}
-	
-	public ChuckNorris(ChuckNorris that){
+
+	public ChuckNorris(ChuckNorris that) {
 		super(that);
-		positiveX=that.positiveX;
-		xVelocity=that.xVelocity;
-		model=that.model;
-		randomAddition=that.randomAddition;
-		xRandom=that.xRandom;
-		chuckNorrisImage=that.chuckNorrisImage;
+		decreaseHealth=that.decreaseHealth;
+		positiveX = that.positiveX;
+		xVelocity = that.xVelocity;
+		model = that.model;
+		randomAddition = that.randomAddition;
+		xRandom = that.xRandom;
+		chuckNorrisImage = that.chuckNorrisImage;
 	}
 
 	public Image getImage() {
@@ -57,18 +60,22 @@ public class ChuckNorris extends Sprite {
 	}
 
 	boolean update() {
+		if(decreaseHealth){
+			model.decreaseHealth(callCost);
+			decreaseHealth=false;
+		}
 		if (positiveX) { // Do this only once.
 			Iterator<Sprite> iterator = model.getIterator();
 			while (iterator.hasNext()) {// cycle through sprites
 				Sprite next = iterator.next();
 				if (next.isObstacle()) {
 					Obstacle temp = (Obstacle) next;
-					if (this.doesCollide(next)&&!temp.beenHit) {
-						//If it collides with an obstacle.
+					if (this.doesCollide(next) && !temp.beenHit) {
+						// If it collides with an obstacle.
 						positiveX = false;
 						temp.yDestination = 0;
-						yVelocity=0;
-						temp.beenHit=true;
+						yVelocity = 0;
+						temp.beenHit = true;
 					}
 				}
 			}
@@ -76,25 +83,29 @@ public class ChuckNorris extends Sprite {
 		if (xPosition > 500 || yPosition > 500) {
 			return true;
 		}
-		//move up and right
+		// move up and right
 		if (positiveX) {
 			xPosition += 5 + xRandom;
 			yPosition -= 30;
 		} else {
-			//if it hit
+			// if it hit
 			xPosition -= 5 + xRandom;
 			xPosition += xVelocity;
-			yPosition+=10;
-			yVelocity+=1;
+			yPosition += 10;
+			yVelocity += 1;
 		}
-		//move down (arc affect)
+		// move down (arc affect)
 		yPosition += yVelocity;
 		yVelocity += 1;
 		return false;
 	}
-	
-	public Sprite cloneSprite(){
+
+	public Sprite cloneSprite() {
 		return new ChuckNorris(this);
+	}
+
+	public Boolean isBird() {
+		return false;
 	}
 
 }

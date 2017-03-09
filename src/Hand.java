@@ -108,4 +108,8 @@ public class Hand extends Sprite {
 	public Sprite cloneSprite() {
 		return new Hand(this);
 	}
+	
+	public Boolean isBird(){
+		return false;
+	}
 }
