@@ -21,8 +21,8 @@ public class Game extends JFrame {
 
     public void run() {
         while (true) {
-        	//controller.update();
         	model.update();
+        	controller.update();
             view.repaint(); // Indirectly calls View.paintComponent
             // Go to sleep for 50 miliseconds 
             try {

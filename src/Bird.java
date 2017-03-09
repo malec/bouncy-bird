@@ -65,6 +65,12 @@ public class Bird extends Sprite {
 			checkBounds();
 			// Move the bird
 			if (yPosition < 400 && yPosition > 10) {
+				if(dblVerticalVelcoity>=0){
+ 					birdImage=defaultbirdImage;
+				}
+				else if(dblVerticalVelcoity<0){
+					birdImage=birdFlapImage;
+				}
 				dblVerticalVelcoity += wingflyDuration;
 				yPosition += dblVerticalVelcoity;
 				// frameCouter++;

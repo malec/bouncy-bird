@@ -23,6 +23,8 @@ class Model {
 	private final int difficultyIncreaseFrequency = 200;
 	private static final int d = 25;
 	private static final int k = 6;
+	private int flapFrame;
+	private boolean flapped=false;
 
 	Model() {
 		bird = new Bird(this);
@@ -34,9 +36,9 @@ class Model {
 		hand = new Hand(bird);
 		spriteList = new LinkedList<Sprite>();
 		Obstacle obs1 = new Obstacle(true, 500, 200, random);// max
-		Obstacle obs2 = new Obstacle(true, 500, 200, random); // Test
+		// Obstacle obs2 = new Obstacle(false, 800, -70, random); // Test
 		spriteList.add(new Obstacle(obs1));
-		spriteList.add(new Obstacle(obs2));
+		// spriteList.add(new Obstacle(obs2));
 		spriteList.add(bird);
 		spriteList.add(hand);
 		bird.health = 100;
@@ -241,6 +243,11 @@ class Model {
 		} else if (type == Bird.actions.flap) {
 			// System.out.println("Simulated Flap");
 			bird.flap();
+			flapped=true; 
+			if(flapped){
+			flapFrame=frames;
+			}
+			bird.release();
 		}
 	}
 }

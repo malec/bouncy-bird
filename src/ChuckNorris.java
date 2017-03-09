@@ -73,7 +73,7 @@ public class ChuckNorris extends Sprite {
 				Sprite next = iterator.next();
 				if (next.isObstacle()) {
 					Obstacle temp = (Obstacle) next;
-					if (this.doesCollide(next) && !hasHitObstacle&&!temp.beenHit) {
+					if (this.doesCollide(next) && !hasHitObstacle) {
 						// If it collides with an obstacle.
 						positiveX = false;
 						temp.yDestination = 0;

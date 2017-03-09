@@ -13,10 +13,10 @@ public class Obstacle extends Sprite {
 	private static int minYUpright = 150;
 	private static int minYNotUpright = 100;
 	private static int maxYNotUpright = 300;
-	private static boolean bypassCollision;
+	private boolean bypassCollision;
 	private boolean bypassScore;
 	private static int birdWidth = 64;
-	private static int scrollSpeed = 7;
+	private static int scrollSpeed = 9;
 	private static int previousYPosition;
 	public int yDestination;
 	private double yVelocity = 0;
