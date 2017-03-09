@@ -19,9 +19,9 @@ class Model {
 	public LinkedList<Sprite> spriteList;
 	public final static int healthDecrement = 20;
 	private double healthTick = 0;
-	private int spawnFrequency = 30;
-	private final int difficultyIncreaseFrequency = 200;
-	private static final int d = 25;
+	private int spawnFrequency = 20;
+	//private final int difficultyIncreaseFrequency = 200;
+	private static final int d = 15;
 	private static final int k = 6;
 
 	Model() {
@@ -92,15 +92,6 @@ class Model {
 		}
 		if (gameOver) {
 			hand.animate(bird.yPosition);
-		}
-		// To prevent overflow.
-		if (frames >= difficultyIncreaseFrequency) {
-			frames = 0;
-			if (spawnFrequency > 10) {
-				spawnFrequency--;
-			} else {
-				Obstacle.increaseDifficulty();
-			}
 		}
 	}
 
@@ -177,7 +168,6 @@ class Model {
 	public void incrementScore() {
 		score++;
 		bird.resetCollision();
-		System.out.println("SCORE++. Score: " + score);
 	}
 
 	public void scoreReset() {
@@ -223,8 +213,6 @@ class Model {
 
 		// Recursively Evaluate
 		if (depth % k != 0) {
-			System.out.println("Bird y now: " + copy.bird.yPosition);
-			System.out.println("Health:" + copy.bird.health);
 			return copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
 		} else {
 			double best = copy.evaluateAction(Bird.actions.do_nothing, depth + 1);
@@ -241,8 +229,6 @@ class Model {
 		} else if (type == Bird.actions.flap) {
 			// System.out.println("Simulated Flap");
 			bird.flap();
-			flapped=true;
-			bird.release();
 		}
 	}
 }

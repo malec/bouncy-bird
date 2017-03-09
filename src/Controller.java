@@ -18,13 +18,10 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 		//do the best one
 		if ((chuckCost > flapCost) && (chuckCost > nothingCost)) {
 			model.doAction(Bird.actions.call_chuck);
-			System.out.println("Call chuck");
 		} else if (flapCost > nothingCost) {
 			model.doAction(Bird.actions.flap);
-			System.out.println("Flap");
 		} else {
 			model.doAction(Bird.actions.do_nothing);
-			System.out.println("Do nothing");
 			if(nothingCost==0){
 				System.out.println("There is no way to survive. :-(");
 			}

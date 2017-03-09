@@ -148,7 +148,6 @@ public class Bird extends Sprite {
 				if (this.doesCollide(next)) {
 
 					if (tempObs.allowCollision()) {
-						System.out.println("Collision");
 						tempObs.bypassCollision();
 						return true;
 					}
