@@ -13,7 +13,7 @@ public class Obstacle extends Sprite {
 	private static int minYUpright = 150;
 	private static int minYNotUpright = 100;
 	private static int maxYNotUpright = 300;
-	private boolean bypassCollision;
+	private static boolean bypassCollision;
 	private boolean bypassScore;
 	private static int birdWidth = 64;
 	private static int scrollSpeed = 7;
@@ -60,6 +60,7 @@ public class Obstacle extends Sprite {
 		yDestination = other.yDestination;
 		yVelocity = other.yVelocity;
 		beenHit = other.beenHit;
+		
 	}
 
 	// Return true if you should remove from the collection.

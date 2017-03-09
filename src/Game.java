@@ -21,12 +21,12 @@ public class Game extends JFrame {
 
     public void run() {
         while (true) {
-        	controller.update();
+        	//controller.update();
         	model.update();
             view.repaint(); // Indirectly calls View.paintComponent
             // Go to sleep for 50 miliseconds 
             try {
-                Thread.sleep(40);
+                Thread.sleep(50);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.exit(1);

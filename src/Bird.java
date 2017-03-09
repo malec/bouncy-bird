@@ -70,10 +70,10 @@ public class Bird extends Sprite {
 				// frameCouter++;
 			} else {
 				// Game Fail.
-				model.decreaseHealth(Model.healthDecrement);
-				if (yPosition >= 400) {
+				//if (yPosition >= 400) {
+					model.decreaseHealth(Model.healthDecrement);
 					dblVerticalVelcoity = 0;
-				}
+				//}
 			}
 		}
 		/*
@@ -181,10 +181,10 @@ public class Bird extends Sprite {
 			if (collisionFrame == 0) {
 				model.decreaseHealth(Model.healthDecrement);
 				// System.out.println("Caught");
-				collisionFrame++;
+				collisionFrame=0;
 			} else {
 				collisionFrame++;
-				if (collisionFrame >= 20) {
+				if (collisionFrame >= 400) {
 					model.decreaseHealth(Model.healthDecrement);
 					// System.out.println("Decreased on interval of 10");
 					collisionFrame = 0;
@@ -206,7 +206,8 @@ public class Bird extends Sprite {
 	public void setModel(Model m) {
 		model = m;
 	}
-	public Boolean isBird(){
+
+	public Boolean isBird() {
 		return true;
 	}
 }

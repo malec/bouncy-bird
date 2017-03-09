@@ -14,8 +14,10 @@ public class ChuckNorris extends Sprite {
 	private Model model;
 	private boolean positiveX;
 	private double xVelocity;
-	private static int callCost=10;
+	private static int callCost=5;
 	private boolean decreaseHealth;
+	private static final int xMoveAmount = 10;
+	private boolean hasHitObstacle;
 
 	public ChuckNorris(Model m) {
 		positiveX = true;
@@ -25,6 +27,7 @@ public class ChuckNorris extends Sprite {
 		yPosition = 500;
 		randomAddition = new Random();
 		decreaseHealth=true;
+		hasHitObstacle=false;
 		if (chuckNorrisImage == null) {// Lazy load
 			try {
 				chuckNorrisImage = ImageIO.read(new File("chuck_norris.png"));
@@ -33,7 +36,6 @@ public class ChuckNorris extends Sprite {
 				System.exit(1);
 			}
 		}
-		xRandom = randomAddition.nextInt(15);
 	}
 
 	public ChuckNorris(ChuckNorris that) {
@@ -45,6 +47,7 @@ public class ChuckNorris extends Sprite {
 		randomAddition = that.randomAddition;
 		xRandom = that.xRandom;
 		chuckNorrisImage = that.chuckNorrisImage;
+		hasHitObstacle=that.hasHitObstacle;
 	}
 
 	public Image getImage() {
@@ -70,12 +73,13 @@ public class ChuckNorris extends Sprite {
 				Sprite next = iterator.next();
 				if (next.isObstacle()) {
 					Obstacle temp = (Obstacle) next;
-					if (this.doesCollide(next) && !temp.beenHit) {
+					if (this.doesCollide(next) && !hasHitObstacle&&!temp.beenHit) {
 						// If it collides with an obstacle.
 						positiveX = false;
 						temp.yDestination = 0;
 						yVelocity = 0;
 						temp.beenHit = true;
+						hasHitObstacle=true;
 					}
 				}
 			}
@@ -85,7 +89,7 @@ public class ChuckNorris extends Sprite {
 		}
 		// move up and right
 		if (positiveX) {
-			xPosition += 5 + xRandom;
+			xPosition += xMoveAmount;
 			yPosition -= 30;
 		} else {
 			// if it hit

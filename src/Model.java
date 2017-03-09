@@ -19,7 +19,7 @@ class Model {
 	public LinkedList<Sprite> spriteList;
 	public final static int healthDecrement = 20;
 	private double healthTick = 0;
-	private int spawnFrequency = 20;
+	private int spawnFrequency = 30;
 	private final int difficultyIncreaseFrequency = 200;
 	private static final int d = 25;
 	private static final int k = 6;
@@ -33,10 +33,10 @@ class Model {
 		gameOver = false;
 		hand = new Hand(bird);
 		spriteList = new LinkedList<Sprite>();
-		spriteList.add(new Obstacle(true, 500, 200, random));// max
-		spriteList.add(
-				new Obstacle(true, 30 + bird.birdImage.getWidth(null), 10 + bird.birdImage.getHeight(null), random)); // Test
-																														// Tube
+		Obstacle obs1 = new Obstacle(true, 500, 200, random);// max
+		Obstacle obs2 = new Obstacle(true, 500, 200, random); // Test
+		spriteList.add(new Obstacle(obs1));
+		spriteList.add(new Obstacle(obs2));
 		spriteList.add(bird);
 		spriteList.add(hand);
 		bird.health = 100;
@@ -76,7 +76,7 @@ class Model {
 			if (frames % spawnFrequency == 0) {
 				// print out a new obstacle every 25 frames.
 				Obstacle newRandom = new Obstacle(random);
-				spriteList.add(newRandom);
+				spriteList.add(new Obstacle(newRandom));
 			} else {
 				while (temp.hasNext()) {
 					tempSprite = temp.next();
