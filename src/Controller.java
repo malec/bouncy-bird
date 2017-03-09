@@ -48,7 +48,7 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 
 	public void mouseReleased(MouseEvent e) {
 		if (Model.gameIsRunning() && e.getButton() == MouseEvent.BUTTON1) {
-			model.onRelease();
+			//model.onRelease();
 		}
 	}
 
@@ -75,7 +75,7 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			model.onClick();
+			//model.onClick();
 		}
 	}
 

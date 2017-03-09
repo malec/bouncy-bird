@@ -66,10 +66,10 @@ public class Bird extends Sprite {
 			// Move the bird
 			if (yPosition < 400 && yPosition > 10) {
 				if(dblVerticalVelcoity>=0){
- 					birdImage=defaultbirdImage;
+ 					birdImage=birdFlapImage;
 				}
 				else if(dblVerticalVelcoity<0){
-					birdImage=birdFlapImage;
+					birdImage=defaultbirdImage;
 				}
 				dblVerticalVelcoity += wingflyDuration;
 				yPosition += dblVerticalVelcoity;
@@ -102,7 +102,7 @@ public class Bird extends Sprite {
 
 		dblVerticalVelcoity += verticalVelocityIncrement;
 		yPosition += dblVerticalVelcoity;
-		birdImage = birdFlapImage;
+ 		birdImage = defaultbirdImage;
 	}
 
 	public void release() {

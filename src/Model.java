@@ -23,8 +23,6 @@ class Model {
 	private final int difficultyIncreaseFrequency = 200;
 	private static final int d = 25;
 	private static final int k = 6;
-	private int flapFrame;
-	private boolean flapped=false;
 
 	Model() {
 		bird = new Bird(this);
@@ -243,10 +241,7 @@ class Model {
 		} else if (type == Bird.actions.flap) {
 			// System.out.println("Simulated Flap");
 			bird.flap();
-			flapped=true; 
-			if(flapped){
-			flapFrame=frames;
-			}
+			flapped=true;
 			bird.release();
 		}
 	}
