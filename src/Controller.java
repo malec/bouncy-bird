@@ -61,7 +61,7 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3) {
 			// Call for Chuck Norris.
-			model.spawnChuckNorris();
+			model.spriteList.add(new ChuckNorris(model));
 		}
 	}
 

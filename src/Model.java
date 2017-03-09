@@ -59,11 +59,12 @@ class Model {
 				spriteList.add(next.cloneSprite());
 			}
 		}
-		if(bird==null){
-			// you could throw new RuntimeException("Bird is null, and probably isn't in the list");
-			bird=(Bird)m.bird.cloneSprite();
+		if (bird == null) {
+			// you could throw new RuntimeException("Bird is null, and probably
+			// isn't in the list");
+			bird = (Bird) m.bird.cloneSprite();
 		}
-		bird.setModel(this);		
+		bird.setModel(this);
 	}
 
 	public void update() {
@@ -208,10 +209,6 @@ class Model {
 		}
 	}
 
-	public void spawnChuckNorris() {
-		spriteList.add(new ChuckNorris(this));
-	}
-
 	public double evaluateAction(Bird.actions type, int depth) {
 		if (bird.health <= 0) {
 			return 0;
@@ -239,12 +236,11 @@ class Model {
 
 	public void doAction(Bird.actions type) {
 		if (type == Bird.actions.call_chuck) {
-			spawnChuckNorris();
+			spriteList.add(new ChuckNorris(this));
 			// System.out.println("Simulated Spawn chuck");
 		} else if (type == Bird.actions.flap) {
 			// System.out.println("Simulated Flap");
 			bird.flap();
-		} else {
 		}
 	}
 }
