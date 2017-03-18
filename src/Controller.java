@@ -72,7 +72,7 @@ class Controller implements KeyListener, ActionListener, MouseListener {
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			//model.onClick();
+			model.onClick();
 		}
 	}
 
