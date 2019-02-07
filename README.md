@@ -1,5 +1,4 @@
 # bouncy-bird
-Flappy bird - with a twist!
 
 Written in java.
 * Press space to jump.
